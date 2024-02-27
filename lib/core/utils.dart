@@ -13,6 +13,8 @@ class Utils {
   static final maskFormatter =
       MaskTextInputFormatter(mask: '+7 (###) ###-##-##');
 
+  final dio = Dio();
+
   static bool prefix = false;
   static bool shadow = false;
   static bool phoneValid = false;
@@ -21,13 +23,6 @@ class Utils {
   static bool txtValid = false;
   static bool warn = false;
   static bool block = false;
-
-  static final options = Options(
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    },
-  );
 
   static Future<void> getTokens() async {
     final prefs = await SharedPreferences.getInstance();

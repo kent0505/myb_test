@@ -1,13 +1,9 @@
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
-
 import '../../core/constants.dart';
-import '../../core/utils.dart';
+import '../../core/network/dio_options.dart';
 
 class SettingsRepository {
-  final dio = Dio();
-
   Future<bool> appeal(String name, String email, String message) async {
     try {
       final response = await dio.post(
@@ -17,7 +13,7 @@ class SettingsRepository {
           'email': email,
           'message': message,
         },
-        options: Utils.options,
+        options: options,
       );
 
       log(response.statusCode.toString());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/widgets/loading/loading_widget.dart';
 import 'bloc/settings_bloc.dart';
 import 'widgets/appeal_error_widget.dart';
 import 'widgets/appeal_widget.dart';
@@ -25,6 +26,10 @@ class _SettingsPageState extends State<SettingsPage> {
 
         if (state is SettingsAppealState) {
           return const AppealWidget();
+        }
+
+        if (state is SettingsLoadingState) {
+          return const LoadingWidget();
         }
 
         if (state is SettingsSuccessState) {
