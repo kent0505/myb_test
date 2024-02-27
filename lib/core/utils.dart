@@ -1,6 +1,3 @@
-import 'package:dio/dio.dart';
-
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -10,13 +7,6 @@ class Utils {
   static String token = '';
   static String fcmToken = 'abcdefg';
 
-  static final maskFormatter =
-      MaskTextInputFormatter(mask: '+7 (###) ###-##-##');
-
-  final dio = Dio();
-
-  static bool prefix = false;
-  static bool shadow = false;
   static bool phoneValid = false;
   static bool nameValid = false;
   static bool emailValid = false;

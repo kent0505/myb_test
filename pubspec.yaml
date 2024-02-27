@@ -21,7 +21,6 @@ dependencies:
   flutter_svg: ^2.0.9
 
   #TOOLS
-  get_it: ^7.6.4
   mask_text_input_formatter: ^2.7.0
   pin_code_fields: ^8.0.1
   permission_handler: ^11.3.0
@@ -31,7 +30,6 @@ dependencies:
   jwt_decoder: ^2.0.1
   connectycube_flutter_call_kit: ^2.7.0
   flutter_callkit_incoming: ^2.0.1+2
-  uuid: ^4.3.3
 
 dev_dependencies:
   flutter_test:
