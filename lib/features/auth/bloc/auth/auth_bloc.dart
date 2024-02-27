@@ -45,6 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           AuthResult result = await _repository.login(phone!, Utils.fcmToken);
           if (result is SuccessResult) {
             await Utils.saveData('token', result.token);
+            await Utils.getTokens();
             emit(HomeState());
             await Future.delayed(const Duration(seconds: 1), () {
               emit(AuthInitial());
@@ -70,6 +71,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       if (result is SuccessResult) {
         await Utils.saveData('token', result.token);
+        await Utils.getTokens();
         emit(OnboardingState());
       }
     });
