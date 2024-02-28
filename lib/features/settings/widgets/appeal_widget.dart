@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myb_test/core/utils.dart';
+import 'package:blocker/core/utils.dart';
 
 import '../../../core/app_colors.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';

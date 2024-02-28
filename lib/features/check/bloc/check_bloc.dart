@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myb_test/features/check/check_repository.dart';
+import 'package:blocker/features/check/check_repository.dart';
 
 import '../../../core/utils.dart';
 

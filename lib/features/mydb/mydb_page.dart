@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myb_test/core/widgets/buttons/border_button.dart';
-import 'package:myb_test/core/widgets/buttons/yellow_button.dart';
+import 'package:blocker/core/widgets/buttons/border_button.dart';
+import 'package:blocker/core/widgets/buttons/yellow_button.dart';
 
 import '../../core/app_colors.dart';
 import '../../core/widgets/checkbox/checkbox_widget.dart';
