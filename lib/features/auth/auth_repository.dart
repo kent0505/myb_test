@@ -3,11 +3,10 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 
 import '../../core/constants.dart';
+import '../../core/network/dio_options.dart';
 import 'auth_result.dart';
 
 class AuthRepository {
-  final dio = Dio();
-
   Future<AuthResult> registerGetCode(String phone) async {
     try {
       final response = await dio.post(

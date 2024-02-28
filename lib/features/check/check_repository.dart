@@ -1,18 +1,14 @@
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
-
 import '../../core/constants.dart';
-import '../../core/utils.dart';
+import '../../core/network/dio_options.dart';
 
 class CheckRepository {
-  final dio = Dio();
-
   Future<CheckResult> getPhoneInfo(String phone) async {
     try {
       final response = await dio.get(
         '${Const.phoneInfoUrl}?phone_number=$phone',
-        options: Utils.options,
+        options: options,
       );
 
       log(response.statusCode.toString());

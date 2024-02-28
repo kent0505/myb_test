@@ -1,13 +1,9 @@
 import 'dart:developer';
 
-import 'package:dio/dio.dart';
-
 import '../../core/constants.dart';
-import '../../core/utils.dart';
+import '../../core/network/dio_options.dart';
 
 class HelpRepository {
-  final dio = Dio();
-
   Future<bool> help(String name, String phone, String email) async {
     try {
       final response = await dio.post(
@@ -17,7 +13,7 @@ class HelpRepository {
           'phone_number': phone,
           'email': email,
         },
-        options: Utils.options,
+        options: options,
       );
 
       log(response.statusCode.toString());

@@ -1,6 +1,3 @@
-import 'package:dio/dio.dart';
-
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -10,24 +7,12 @@ class Utils {
   static String token = '';
   static String fcmToken = 'abcdefg';
 
-  static final maskFormatter =
-      MaskTextInputFormatter(mask: '+7 (###) ###-##-##');
-
-  static bool prefix = false;
-  static bool shadow = false;
   static bool phoneValid = false;
   static bool nameValid = false;
   static bool emailValid = false;
   static bool txtValid = false;
   static bool warn = false;
   static bool block = false;
-
-  static final options = Options(
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    },
-  );
 
   static Future<void> getTokens() async {
     final prefs = await SharedPreferences.getInstance();
