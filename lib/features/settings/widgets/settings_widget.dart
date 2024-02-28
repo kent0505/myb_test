@@ -166,6 +166,7 @@ class _AdditionalButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         SvgPicture.asset('assets/icons/$asset.svg', height: 18),
         const SizedBox(width: 8),
@@ -174,9 +175,19 @@ class _AdditionalButton extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(
-              color: blue ? AppColors.brandSky : AppColors.primaryBlack,
               fontWeight: FontWeight.w500,
               fontSize: 14,
+              shadows: [
+                Shadow(
+                  color: blue ? AppColors.brandSky : AppColors.primaryBlack,
+                  offset: const Offset(0, -1.5),
+                )
+              ],
+              color: Colors.transparent,
+              decoration: TextDecoration.underline,
+              decorationColor:
+                  blue ? AppColors.brandSky : AppColors.primaryBlack,
+              decorationThickness: 1.5,
             ),
           ),
         ),
