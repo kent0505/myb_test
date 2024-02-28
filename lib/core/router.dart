@@ -1,11 +1,15 @@
-import 'package:blocker/features/help/pages/help_status_page.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/auth/pages/otp_page.dart';
+import '../features/auth/pages/phone_page.dart';
+import '../features/auth/pages/reason_page.dart';
+import '../features/check/pages/check_result_page.dart';
 import '../features/check/pages/web_page.dart';
+import '../features/help/pages/help_status_page.dart';
 import '../features/settings/pages/contact_page.dart';
 import '../features/settings/pages/contact_status_page.dart';
-import '../features/splash/splash_screen.dart';
-import '../features/auth/auth_page.dart';
+import '../features/splash/splash_page.dart';
+import '../features/auth/pages/auth_page.dart';
 import '../features/home/home_page.dart';
 import '../features/onboarding/pages/onboarding_page.dart';
 import '../features/onboarding/pages/blocker_settings_page.dart';
@@ -29,6 +33,18 @@ final routerConfig = GoRouter(
       builder: (context, state) => const AuthPage(),
     ),
     GoRoute(
+      path: '/phone',
+      builder: (context, state) => const PhonePage(),
+    ),
+    GoRoute(
+      path: '/otp',
+      builder: (context, state) => const OtpPage(),
+    ),
+    GoRoute(
+      path: '/reason',
+      builder: (context, state) => const ReasonPage(),
+    ),
+    GoRoute(
       path: '/home',
       builder: (context, state) => const HomePage(),
     ),
@@ -39,6 +55,10 @@ final routerConfig = GoRouter(
     GoRoute(
       path: '/block_settings',
       builder: (context, state) => const BlockerSettingsPage(),
+    ),
+    GoRoute(
+      path: '/check_result',
+      builder: (context, state) => const CheckResultPage(),
     ),
     GoRoute(
       path: '/policy',

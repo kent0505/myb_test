@@ -39,6 +39,7 @@ class TxtField extends StatelessWidget {
             ),
           );
         },
+        textCapitalization: TextCapitalization.sentences,
         textAlignVertical: TextAlignVertical.top,
         cursorColor: Colors.black,
         cursorWidth: 1,

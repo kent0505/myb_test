@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 class Utils {
   static String token = '';
   static String fcmToken = 'abcdefg';
+  static bool blockSettings = false;
 
   static bool phoneValid = false;
   static bool nameValid = false;
@@ -20,6 +21,7 @@ class Utils {
     fcmToken = prefs.getString('fcmToken') ?? 'abcdefg';
     warn = prefs.getBool('warn') ?? false;
     block = prefs.getBool('block') ?? false;
+    blockSettings = prefs.getBool('blockSettings') ?? false;
     // print('fcmtoken: $fcmToken');
   }
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../core/app_colors.dart';
 
@@ -149,7 +148,7 @@ class ResultCardWidget extends StatelessWidget {
           _SearchInternetButton(
             active: true,
             onPressed: () {
-              context.push('/web', extra: '79005555555');
+              // context.push('/web', extra: '79005555555');
             },
           ),
         ],

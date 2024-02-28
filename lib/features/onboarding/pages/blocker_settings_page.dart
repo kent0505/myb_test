@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/app_colors.dart';
+import '../../../core/utils.dart';
 import '../../../core/widgets/buttons/border_button.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 
@@ -82,15 +83,21 @@ class _BlockerSettingsPageState extends State<BlockerSettingsPage> {
                 title: 'Перейти в настройки',
                 active: true,
                 onPressed: () async {
-                  await openAppSettings();
+                  try {
+                    await openAppSettings();
+                  } catch (e) {
+                    print(e);
+                  }
                 },
               ),
               const SizedBox(height: 16),
               YellowButton(
                 title: 'Готово',
                 active: active,
-                onPressed: () {
-                  context.go('/home');
+                onPressed: () async {
+                  await Utils.saveBool('blockSettings', true).then((_) {
+                    context.go('/home');
+                  });
                 },
               ),
               const SizedBox(height: 76),

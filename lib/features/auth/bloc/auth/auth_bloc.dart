@@ -14,21 +14,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   bool? registered;
 
   AuthBloc() : super(AuthInitial()) {
-    on<LoginInitialEvent>((event, emit) {
-      emit(PhoneState());
-    });
-
-    on<CheckValidEvent>((event, emit) {
-      emit(PhoneState());
+    on<CheckEvent>((event, emit) {
+      emit(AuthInitial());
     });
 
     on<LoginEvent>((event, emit) async {
+      emit(LoadingState());
       phone = event.phone
           .replaceAll(' (', '')
           .replaceAll(') ', '')
           .replaceAll('-', '');
+
       if (phone != null) {
         Result result = await _repository.registerGetCode(phone!);
+
         if (result is CodeResult) {
           otp = result.code.toString();
           registered = result.registered;
@@ -45,14 +44,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           if (result is SuccessResult) {
             await Utils.saveData('token', result.token);
             await Utils.getTokens();
-            emit(HomeState());
-            await Future.delayed(const Duration(seconds: 1), () {
-              emit(AuthInitial());
-            });
+            if (Utils.blockSettings) {
+              emit(HomeState());
+            } else {
+              emit(BlockerSettingsState());
+            }
+          } else {
+            emit(ErrorState());
           }
         } else {
           emit(ReasonState());
         }
+      } else {
+        emit(OtpErrorState());
       }
     });
 
@@ -63,15 +67,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         reason = 'protection';
       }
+
       Result result = await _repository.register(
         phone ?? '',
         Utils.fcmToken,
         reason,
       );
+
       if (result is SuccessResult) {
         await Utils.saveData('token', result.token);
         await Utils.getTokens();
-        emit(OnboardingState());
+        emit(HomeState());
       }
     });
   }

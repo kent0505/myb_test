@@ -83,32 +83,6 @@ class AuthRepository {
       return ExceptionResult(e.toString());
     }
   }
-
-  // Future<Result> checkRegister(String phone) async {
-  //   try {
-  //     final response = await dio.post(
-  //       Const.registerCheckURL,
-  //       data: {
-  //         'login': '+7$phone',
-  //       },
-  //       options: Options(
-  //         validateStatus: (status) => true,
-  //       ),
-  //     );
-
-  //     log(response.statusCode.toString());
-  //     print(response.data);
-
-  //     if (response.statusCode == 200) {
-  //       return RegisteredResult(response.data['is_registered']);
-  //     } else {
-  //       return ErrorResult();
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //     return ExceptionResult(e.toString());
-  //   }
-  // }
 }
 
 abstract class Result {}

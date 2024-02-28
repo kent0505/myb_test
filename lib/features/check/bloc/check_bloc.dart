@@ -31,11 +31,9 @@ class CheckBloc extends Bloc<CheckEvent, CheckState> {
     on<CheckButtonEvent>((event, emit) async {
       phone = event.phone;
 
-      if (state is CheckInitial) {
-        emit(CheckLoadingState());
-      } else {
-        emit(CheckResultLoadingState());
-      }
+      Utils.phoneValid = false;
+
+      emit(CheckLoadingState());
 
       CheckResult result = await _repository.getPhoneInfo(
         event.phone
@@ -44,6 +42,8 @@ class CheckBloc extends Bloc<CheckEvent, CheckState> {
             .replaceAll(') ', '')
             .replaceAll('-', ''),
       );
+
+      Utils.phoneValid = false;
 
       if (result is CheckSuccessResult) {
         blocked = result.blocked;
@@ -59,8 +59,6 @@ class CheckBloc extends Bloc<CheckEvent, CheckState> {
       } else {
         emit(CheckInitial());
       }
-
-      Utils.phoneValid = false;
     });
   }
 }

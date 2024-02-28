@@ -51,6 +51,3 @@ class ScrollBehaviorModified extends ScrollBehavior {
     return const BouncingScrollPhysics();
   }
 }
-
-// cd Desktop/work/myb_test
-// flutter build apk --split-per-abi

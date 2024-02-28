@@ -23,7 +23,11 @@ class _SplashPageState extends State<SplashPage> {
       if (Utils.token.isNotEmpty &&
           decodedToken != null &&
           decodedToken['exp'] >= now) {
-        context.go('/home');
+        if (Utils.blockSettings == false) {
+          context.go('/block_settings');
+        } else {
+          context.go('/home');
+        }
       } else {
         context.go('/auth');
       }

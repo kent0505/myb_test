@@ -4,7 +4,7 @@ abstract class AuthEvent {}
 
 class LoginInitialEvent extends AuthEvent {}
 
-class CheckValidEvent extends AuthEvent {}
+class CheckEvent extends AuthEvent {}
 
 class LoginEvent extends AuthEvent {
   final String phone;

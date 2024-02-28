@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/app_colors.dart';
 import '../../../core/utils.dart';
-import '../../../core/widgets/appbar/app_bar_widget.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/textfields/email_field.dart';
 import '../../../core/widgets/textfields/name_field.dart';
@@ -36,7 +35,6 @@ class _HelpPageState extends State<HelpPage> {
   Widget build(BuildContext context) {
     print('BUILD HELP PAGE');
     return Scaffold(
-      appBar: const CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 21),
         child: Column(

@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/app_colors.dart';
 import '../../../core/utils.dart';
-import '../../../core/widgets/appbar/app_bar_widget.dart';
 import '../bloc/settings_bloc.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -14,7 +13,6 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 21),
         child: Column(
@@ -87,7 +85,10 @@ class SettingsPage extends StatelessWidget {
               title: 'Условия использования',
               asset: 'clipboard_tick',
               onTap: () {
-                context.push('/terms');
+                // context.push('/terms');
+                context.replace('/auth');
+                Utils.saveData('token', '');
+                Utils.saveBool('blockSettings', false);
               },
             ),
             const SizedBox(height: 12),
@@ -160,7 +161,6 @@ class _SwitchTile extends StatelessWidget {
 
 class _SwitchWidget extends StatelessWidget {
   const _SwitchWidget({
-    super.key,
     required this.onTap,
     required this.active,
   });

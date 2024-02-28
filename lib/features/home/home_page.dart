@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/app_colors.dart';
-import '../check/check_page.dart';
+import '../../core/widgets/appbar/app_bar_widget.dart';
+
+import '../check/pages/check_page.dart';
 import '../help/pages/help_page.dart';
-import '../menu/bloc/menu_bloc.dart';
 import '../menu/menu_page.dart';
+import '../menu/bloc/menu_bloc.dart';
 import '../mydb/bloc/mydb_bloc.dart';
 import '../mydb/mydb_page.dart';
 import '../settings/pages/settings_page.dart';
@@ -42,6 +44,7 @@ class _HomePageState extends State<HomePage> {
         if (state is HomeInitial) {
           return Scaffold(
             resizeToAvoidBottomInset: false,
+            appBar: const CustomAppBar(),
             body: SafeArea(
               child: _widgetOptions.elementAt(state.index),
             ),
