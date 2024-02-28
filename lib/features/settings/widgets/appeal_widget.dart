@@ -46,13 +46,26 @@ class _AppealWidgetState extends State<AppealWidget> {
             ),
           ),
           const SizedBox(height: 30),
-          const Text(
-            'Вы можете написать разработчикам',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-            ),
+          Stack(
+            children: [
+              const Text(
+                'Вы можете написать разработчикам',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
+              Positioned(
+                top: 2,
+                left: 125,
+                child: Container(
+                  height: 3,
+                  width: 95,
+                  color: AppColors.primaryOrange,
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 30),
           const Text(

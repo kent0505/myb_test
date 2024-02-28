@@ -41,14 +41,27 @@ class _ReasonWidgetState extends State<ReasonWidget> {
       mainAxisSize: MainAxisSize.max,
       children: [
         const Spacer(),
-        const Text(
-          'Для каких целей\nВы будете использовать приложение?',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: AppColors.primaryBlack,
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-          ),
+        Stack(
+          children: [
+            const Text(
+              'Для каких целей\nВы будете использовать приложение?',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.primaryBlack,
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            Positioned(
+              bottom: 18,
+              right: 10,
+              child: Container(
+                height: 3,
+                width: 102,
+                color: AppColors.primaryOrange,
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 55),
         Padding(

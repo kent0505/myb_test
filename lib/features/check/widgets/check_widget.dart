@@ -28,14 +28,27 @@ class _CheckWidgetState extends State<CheckWidget> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
-          'Узнайте, кто вам звонил',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: AppColors.basicBlack3,
-            fontWeight: FontWeight.w700,
-            fontSize: 24,
-          ),
+        Stack(
+          children: [
+            const Text(
+              'Узнайте, кто вам звонил',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.basicBlack3,
+                fontWeight: FontWeight.w700,
+                fontSize: 24,
+              ),
+            ),
+            Positioned(
+              top: 2,
+              right: 0,
+              child: Container(
+                height: 3,
+                width: 115,
+                color: AppColors.primaryOrange,
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 24),
         Row(

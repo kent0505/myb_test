@@ -41,13 +41,26 @@ class _MenuPageState extends State<MenuPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 30),
-                const Text(
-                  'Какие звонки \nВы хотите блокировать?',
-                  style: TextStyle(
-                    color: AppColors.basicBlack3,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
+                Stack(
+                  children: [
+                    const Text(
+                      'Какие звонки \nВы хотите блокировать?',
+                      style: TextStyle(
+                        color: AppColors.basicBlack3,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Positioned(
+                      top: 2,
+                      left: 56,
+                      child: Container(
+                        height: 3,
+                        width: 58,
+                        color: AppColors.primaryOrange,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 24),
                 Container(

@@ -61,8 +61,8 @@ class PhoneFieldState extends State<PhoneField> {
         cursorWidth: 1,
         decoration: InputDecoration(
           label: widget.shadow
-              ? const LabelText(label: 'Номер телефона')
-              : const LabelText(label: 'Номер телефона', star: true),
+              ? const LabelText(label: 'Введите номер телефона')
+              : const LabelText(label: 'Введите номер телефона', star: true),
           floatingLabelBehavior: FloatingLabelBehavior.never,
           prefixText: prefix ? '+7' : null,
           prefixStyle: const TextStyle(

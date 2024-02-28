@@ -81,7 +81,7 @@ class _AppLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 30, bottom: 40),
+      padding: const EdgeInsets.only(top: 74, bottom: 53),
       child: SizedBox(
         height: 104,
         child: SvgPicture.asset('assets/images/logo.svg'),
@@ -101,7 +101,6 @@ class _AppName extends StatelessWidget {
           style: TextStyle(
             color: AppColors.primaryText,
             fontSize: 20,
-            fontFamily: 'Roboto Condensed',
             fontWeight: FontWeight.w700,
             height: 0.06,
             letterSpacing: -0.60,
@@ -112,7 +111,6 @@ class _AppName extends StatelessWidget {
           style: TextStyle(
             color: AppColors.primaryText,
             fontSize: 20,
-            fontFamily: 'Roboto Condensed',
             fontWeight: FontWeight.w500,
             height: 0.06,
             letterSpacing: -0.60,

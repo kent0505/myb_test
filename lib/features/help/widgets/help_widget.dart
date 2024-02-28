@@ -48,13 +48,26 @@ class _HelpWidgetState extends State<HelpWidget> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Поможем выйти \nиз трудной ситуации',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-                fontSize: 25,
-              ),
+            Stack(
+              children: [
+                const Text(
+                  'Поможем выйти \nиз трудной ситуации',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 25,
+                  ),
+                ),
+                Positioned(
+                  bottom: 24,
+                  right: 0,
+                  child: Container(
+                    height: 3,
+                    width: 96,
+                    color: AppColors.primaryOrange,
+                  ),
+                ),
+              ],
             ),
             SvgPicture.asset(
               'assets/images/heart.svg',

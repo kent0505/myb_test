@@ -51,12 +51,28 @@ class _HomePageState extends State<HomePage> {
                 statusBarIconBrightness: Brightness.dark,
                 statusBarBrightness: Brightness.dark,
               ),
-              title: const Text(
-                'МЮБ Спам-защитник',
-                style: TextStyle(
-                  color: AppColors.basicBlack3,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
+              title: const Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'МЮБ',
+                      style: TextStyle(
+                        color: AppColors.primaryText,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        letterSpacing: -1.5,
+                      ),
+                    ),
+                    TextSpan(
+                      text: ' Спам-защитник',
+                      style: TextStyle(
+                        color: AppColors.primaryText,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20,
+                        letterSpacing: -1.5,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               centerTitle: true,
@@ -69,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                       });
                     },
                     icon: const Icon(Icons.logout),
-                  )
+                  ),
               ],
             ),
             body: SafeArea(

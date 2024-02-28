@@ -21,18 +21,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
   final pages = [
     PageModel(
       iconPath: 'assets/images/user_search.svg',
-      title: 'Определяйте входящие звонки',
+      title: 'Определяйте\nвходящие звонки',
       subtitle: 'Узнайте, кто скрывается за незнакомым номером',
     ),
     PageModel(
       iconPath: 'assets/images/remove.svg',
-      title: 'Фильтруйте СМС-сообщения',
+      title: 'Фильтруйте\nСМС-сообщения',
       subtitle:
           'Игнорируйте СМС от спамеров, мошенников, коллекторов и надоедливых сервисов',
     ),
     PageModel(
       iconPath: 'assets/images/cloud_add.svg',
-      title: 'Составляйте свою базу номеров',
+      title: 'Составляйте свою\nбазу номеров',
       subtitle:
           'Соберите личный список нежелательных номеров и помогите сервису рабоать лучше',
     ),
@@ -44,7 +44,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(height: 18),
+            const SizedBox(height: 62),
             SvgPicture.asset('assets/images/logo.svg'),
             const SizedBox(height: 100),
             Expanded(
