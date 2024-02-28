@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:blocker/features/check/check_repository.dart';
 
 import '../../../core/utils.dart';
+import '../check_repository.dart';
 
 part 'check_event.dart';
 part 'check_state.dart';

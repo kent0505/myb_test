@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:blocker/core/utils.dart';
 
 import '../../../core/app_colors.dart';
+import '../../../core/utils.dart';
 import '../bloc/settings_bloc.dart';
 import 'switch_widget.dart';
 
