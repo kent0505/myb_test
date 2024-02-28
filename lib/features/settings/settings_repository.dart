@@ -7,7 +7,7 @@ class SettingsRepository {
   Future<bool> appeal(String name, String email, String message) async {
     try {
       final response = await dio.post(
-        Const.appealUrl,
+        Const.appealURL,
         data: {
           'name': name,
           'email': email,

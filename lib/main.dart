@@ -6,11 +6,14 @@ import 'core/themes.dart';
 
 import 'features/auth/bloc/auth/auth_bloc.dart';
 import 'features/auth/bloc/timer/timer_bloc.dart';
+import 'features/home/bloc/home_bloc.dart';
+import 'features/menu/bloc/menu_bloc.dart';
+import 'features/mydb/bloc/mydb_bloc.dart';
 import 'features/check/bloc/check_bloc.dart';
 import 'features/help/bloc/help_bloc.dart';
 import 'features/settings/bloc/settings_bloc.dart';
 
-void main() async {
+void main() {
   runApp(const MyApp());
 }
 
@@ -23,6 +26,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(create: (context) => TimerBloc()),
+        BlocProvider(create: (context) => HomeBloc()),
+        BlocProvider(create: (context) => MenuBloc()),
+        BlocProvider(create: (context) => MydbBloc()),
         BlocProvider(create: (context) => CheckBloc()),
         BlocProvider(create: (context) => HelpBloc()),
         BlocProvider(create: (context) => SettingsBloc()),
@@ -45,3 +51,6 @@ class ScrollBehaviorModified extends ScrollBehavior {
     return const BouncingScrollPhysics();
   }
 }
+
+// cd Desktop/work/myb_test
+// flutter build apk --split-per-abi

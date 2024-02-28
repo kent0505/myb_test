@@ -82,7 +82,10 @@ class _AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 30, bottom: 40),
-      child: SvgPicture.asset('assets/images/logo.svg'),
+      child: SizedBox(
+        height: 104,
+        child: SvgPicture.asset('assets/images/logo.svg'),
+      ),
     );
   }
 }

@@ -7,7 +7,7 @@ class HelpRepository {
   Future<bool> help(String name, String phone, String email) async {
     try {
       final response = await dio.post(
-        Const.helpUrl,
+        Const.helpURL,
         data: {
           'name': name,
           'phone_number': phone,
