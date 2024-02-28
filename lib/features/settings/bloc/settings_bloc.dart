@@ -36,6 +36,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         event.email,
         event.message,
       );
+      Utils.nameValid = false;
+      Utils.emailValid = false;
+      Utils.txtValid = false;
       if (result) {
         emit(SettingsSuccessState());
       } else {
@@ -43,14 +46,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       }
     });
 
-    on<AppealButtonEvent>((event, emit) {
-      emit(SettingsAppealState());
-    });
-
-    on<BackButtonEvent>((event, emit) {
-      Utils.nameValid = false;
-      Utils.emailValid = false;
-      Utils.txtValid = false;
+    on<CheckEvent>((event, emit) {
       emit(SettingsInitial());
     });
   }

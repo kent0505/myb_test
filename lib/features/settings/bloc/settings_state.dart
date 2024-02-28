@@ -4,8 +4,6 @@ abstract class SettingsState {}
 
 class SettingsInitial extends SettingsState {}
 
-class SettingsAppealState extends SettingsState {}
-
 class SettingsLoadingState extends SettingsState {}
 
 class SettingsSuccessState extends SettingsState {}

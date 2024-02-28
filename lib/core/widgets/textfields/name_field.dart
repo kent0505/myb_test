@@ -22,6 +22,12 @@ class NameField extends StatefulWidget {
 
 class _NameFieldState extends State<NameField> {
   @override
+  void initState() {
+    super.initState();
+    Utils.nameValid = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 44,

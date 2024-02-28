@@ -79,10 +79,16 @@ class _CheckResultWidgetState extends State<CheckResultWidget> {
               return const Expanded(
                 child: LoadingWidget(),
               );
-            } else {
+            }
+            if (state is CheckResultState) {
               return Column(
                 children: [
-                  const ResultCardWidget(),
+                  ResultCardWidget(
+                    phone: state.phone,
+                    blocked: state.blocked,
+                    operator: state.operator,
+                    region: state.region,
+                  ),
                   const SizedBox(height: 40),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -108,6 +114,8 @@ class _CheckResultWidgetState extends State<CheckResultWidget> {
                 ],
               );
             }
+
+            return Container();
           },
         ),
       ],

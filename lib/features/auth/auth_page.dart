@@ -132,12 +132,14 @@ class _PolicyButtons extends StatelessWidget {
           TxtButton(
             title: 'Политика конфиденциальности',
             onTap: () {
-              context.go('/home');
+              context.push('/policy');
             },
           ),
           TxtButton(
             title: 'Условия использования',
-            onTap: () {},
+            onTap: () {
+              context.push('/terms');
+            },
           ),
         ],
       ),

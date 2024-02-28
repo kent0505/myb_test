@@ -2,7 +2,7 @@ part of 'help_bloc.dart';
 
 abstract class HelpEvent {}
 
-class ListenEvent extends HelpEvent {}
+class CheckEvent extends HelpEvent {}
 
 class HelpButtonEvent extends HelpEvent {
   final String name;
@@ -14,5 +14,3 @@ class HelpButtonEvent extends HelpEvent {
     this.email,
   );
 }
-
-class BackButtonEvent extends HelpEvent {}

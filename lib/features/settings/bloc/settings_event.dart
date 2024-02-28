@@ -11,8 +11,6 @@ class SwitchEvent extends SettingsEvent {
   );
 }
 
-class AppealButtonEvent extends SettingsEvent {}
-
 class SubmitButtonEvent extends SettingsEvent {
   final String name;
   final String email;
@@ -24,4 +22,4 @@ class SubmitButtonEvent extends SettingsEvent {
   );
 }
 
-class BackButtonEvent extends SettingsEvent {}
+class CheckEvent extends SettingsEvent {}

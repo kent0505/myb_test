@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../core/app_colors.dart';
-import '../../core/utils.dart';
 import '../check/check_page.dart';
-import '../help/help_page.dart';
+import '../help/pages/help_page.dart';
 import '../menu/bloc/menu_bloc.dart';
 import '../menu/menu_page.dart';
 import '../mydb/bloc/mydb_bloc.dart';
 import '../mydb/mydb_page.dart';
-import '../settings/settings_page.dart';
+import '../settings/pages/settings_page.dart';
 import 'bloc/home_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -45,49 +42,6 @@ class _HomePageState extends State<HomePage> {
         if (state is HomeInitial) {
           return Scaffold(
             resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-              systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarColor: Colors.transparent,
-                statusBarIconBrightness: Brightness.dark,
-                statusBarBrightness: Brightness.dark,
-              ),
-              title: const Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'МЮБ',
-                      style: TextStyle(
-                        color: AppColors.primaryText,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
-                        letterSpacing: -1.5,
-                      ),
-                    ),
-                    TextSpan(
-                      text: ' Спам-защитник',
-                      style: TextStyle(
-                        color: AppColors.primaryText,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                        letterSpacing: -1.5,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              centerTitle: true,
-              actions: [
-                if (state.index == 4)
-                  IconButton(
-                    onPressed: () async {
-                      await Utils.saveData('token', '').then((_) {
-                        context.go('/auth');
-                      });
-                    },
-                    icon: const Icon(Icons.logout),
-                  ),
-              ],
-            ),
             body: SafeArea(
               child: _widgetOptions.elementAt(state.index),
             ),

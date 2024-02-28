@@ -10,7 +10,7 @@ class HelpBloc extends Bloc<HelpEvent, HelpState> {
   final _repository = HelpRepository();
 
   HelpBloc() : super(HelpInitial()) {
-    on<ListenEvent>((event, emit) {
+    on<CheckEvent>((event, emit) {
       emit(HelpInitial());
     });
 
@@ -30,18 +30,15 @@ class HelpBloc extends Bloc<HelpEvent, HelpState> {
         event.email,
       );
 
+      Utils.nameValid = false;
+      Utils.emailValid = false;
+      Utils.txtValid = false;
+
       if (result) {
         emit(HelpSuccessState());
       } else {
         emit(HelpErrorState());
       }
-    });
-
-    on<BackButtonEvent>((event, emit) {
-      Utils.nameValid = false;
-      Utils.emailValid = false;
-      Utils.txtValid = false;
-      emit(HelpInitial());
     });
   }
 }

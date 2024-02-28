@@ -1,155 +1,159 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/app_colors.dart';
-import '../bloc/check_bloc.dart';
 
 class ResultCardWidget extends StatelessWidget {
-  const ResultCardWidget({super.key});
+  const ResultCardWidget({
+    super.key,
+    required this.phone,
+    required this.blocked,
+    required this.operator,
+    required this.region,
+  });
+
+  final String phone;
+  final int blocked;
+  final String operator;
+  final String region;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CheckBloc, CheckState>(
-      builder: (context, state) {
-        if (state is CheckResultState) {
-          return Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 24,
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 24,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: const [
+          BoxShadow(
+            blurRadius: 20,
+            offset: Offset(0, 0),
+            color: Color(0xffdee6ef),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            phone,
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w500,
             ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: const [
-                BoxShadow(
-                  blurRadius: 20,
-                  offset: Offset(0, 0),
-                  color: Color(0xffdee6ef),
+          ),
+          const SizedBox(height: 24),
+          Row(
+            children: [
+              SvgPicture.asset(
+                blocked == 0
+                    ? 'assets/icons/tick.svg'
+                    : 'assets/icons/search.svg',
+                width: 18,
+                height: 18,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                blocked == 0
+                    ? 'Номер не числится в спам-базах'
+                    : 'Найденные отметки у номера:',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: AppColors.basicGrey1,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
                 ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  state.phone,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w500,
+              ),
+            ],
+          ),
+          blocked == 0
+              ? Container()
+              : const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Wrap(
+                    spacing: 4,
+                    runSpacing: 4,
+                    children: [
+                      _ResultCategoryWidget(
+                        text: 'Коллектор',
+                        textColor: AppColors.brandRed,
+                        containerColor: Color(0x1af4404c),
+                        containerWidth: 70,
+                      ),
+                      _ResultCategoryWidget(
+                        text: 'Кредитор',
+                        textColor: AppColors.brandRed,
+                        containerColor: Color(0x1af4404c),
+                        containerWidth: 70,
+                      ),
+                      _ResultCategoryWidget(
+                        text: 'Мошенники  ',
+                        textColor: AppColors.brandRed,
+                        containerColor: Color(0x1af4404c),
+                        containerWidth: 80,
+                      ),
+                      _ResultCategoryWidget(
+                        text: 'Спам',
+                        textColor: AppColors.statusOrange,
+                        containerColor: Color(0x2aFB8D0F),
+                        containerWidth: 50,
+                      ),
+                      _ResultCategoryWidget(
+                        text: 'Риелторы',
+                        textColor: AppColors.brandSky,
+                        containerColor: Color(0x3300B2FF),
+                        containerWidth: 70,
+                      ),
+                      _ResultCategoryWidget(
+                        text: 'Реклама',
+                        textColor: AppColors.statusOrange,
+                        containerColor: Color(0x20FB8D0F),
+                        containerWidth: 70,
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      state.blocked == 0
-                          ? 'assets/icons/tick.svg'
-                          : 'assets/icons/search.svg',
-                      width: 18,
-                      height: 18,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      state.blocked == 0
-                          ? 'Номер не числится в спам-базах'
-                          : 'Найденные отметки у номера:',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: AppColors.basicGrey1,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-                state.blocked == 0
-                    ? Container()
-                    : const Padding(
-                        padding: EdgeInsets.only(top: 16),
-                        child: Wrap(
-                          spacing: 4,
-                          runSpacing: 4,
-                          children: [
-                            _ResultCategoryWidget(
-                              text: 'Коллектор',
-                              textColor: AppColors.brandRed,
-                              containerColor: Color(0x1af4404c),
-                              containerWidth: 70,
-                            ),
-                            _ResultCategoryWidget(
-                              text: 'Кредитор',
-                              textColor: AppColors.brandRed,
-                              containerColor: Color(0x1af4404c),
-                              containerWidth: 70,
-                            ),
-                            _ResultCategoryWidget(
-                              text: 'Мошенники  ',
-                              textColor: AppColors.brandRed,
-                              containerColor: Color(0x1af4404c),
-                              containerWidth: 80,
-                            ),
-                            _ResultCategoryWidget(
-                              text: 'Спам',
-                              textColor: AppColors.statusOrange,
-                              containerColor: Color(0x2aFB8D0F),
-                              containerWidth: 50,
-                            ),
-                            _ResultCategoryWidget(
-                              text: 'Риелторы',
-                              textColor: AppColors.brandSky,
-                              containerColor: Color(0x3300B2FF),
-                              containerWidth: 70,
-                            ),
-                            _ResultCategoryWidget(
-                              text: 'Реклама',
-                              textColor: AppColors.statusOrange,
-                              containerColor: Color(0x20FB8D0F),
-                              containerWidth: 70,
-                            ),
-                          ],
+          operator.isNotEmpty && region.isNotEmpty
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 24),
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Информация \nо номере:',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: AppColors.basicGrey1,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
                         ),
                       ),
-                state.operator.isNotEmpty && state.region.isNotEmpty
-                    ? Padding(
-                        padding: const EdgeInsets.only(top: 24),
-                        child: Row(
-                          children: [
-                            const Text(
-                              'Информация \nо номере:',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                color: AppColors.basicGrey1,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            Text(
-                              '${state.operator}\n${state.region}',
-                              textAlign: TextAlign.start,
-                              style: const TextStyle(
-                                color: AppColors.primaryBlack,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
+                      const SizedBox(width: 16),
+                      Text(
+                        '$operator\n$region',
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                          color: AppColors.primaryBlack,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
                         ),
-                      )
-                    : Container(),
-                const SizedBox(height: 24),
-                _SearchInternetButton(
-                  active: false,
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          );
-        }
-
-        return Container();
-      },
+                      ),
+                    ],
+                  ),
+                )
+              : Container(),
+          const SizedBox(height: 24),
+          _SearchInternetButton(
+            active: true,
+            onPressed: () {
+              context.push('/web', extra: '79005555555');
+            },
+          ),
+        ],
+      ),
     );
   }
 }

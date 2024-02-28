@@ -30,6 +30,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   connectycube_flutter_call_kit: ^2.7.0
   flutter_callkit_incoming: ^2.0.1+2
+  webview_flutter: ^4.7.0
 
 dev_dependencies:
   flutter_test:
