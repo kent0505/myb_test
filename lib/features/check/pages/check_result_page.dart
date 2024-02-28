@@ -1,3 +1,4 @@
+import 'package:blocker/core/widgets/dialogs/phone_add_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -112,7 +113,14 @@ class _CheckResultPageState extends State<CheckResultPage> {
                               title: 'Спам',
                               icon: 'alert',
                               active: true,
-                              onPressed: () {},
+                              onPressed: () async {
+                                await showDialog(
+                                  context: context,
+                                  builder: (context) => PhoneAddDialog(
+                                    phone: state.phone,
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ],
