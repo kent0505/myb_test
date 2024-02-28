@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myb_test/features/mydb/models/phone.dart';
 
+import '../models/phone.dart';
 import '../mydb_repository.dart';
 
 part 'mydb_event.dart';
