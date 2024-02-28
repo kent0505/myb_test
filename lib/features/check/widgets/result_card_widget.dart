@@ -12,38 +12,6 @@ class ResultCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CheckBloc, CheckState>(
       builder: (context, state) {
-        if (state is CheckResultErrorState) {
-          return Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 24,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: const [
-                BoxShadow(
-                  blurRadius: 20,
-                  offset: Offset(0, 0),
-                  color: Color(0xffdee6ef),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  state.phone,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-
         if (state is CheckResultState) {
           return Container(
             padding: const EdgeInsets.symmetric(
@@ -142,30 +110,34 @@ class ResultCardWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    const Text(
-                      'Информация \nо номере:',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        color: AppColors.basicGrey1,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Text(
-                      '${state.operator}\n${state.region}',
-                      textAlign: TextAlign.start,
-                      style: const TextStyle(
-                        color: AppColors.primaryBlack,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+                state.operator.isNotEmpty && state.region.isNotEmpty
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 24),
+                        child: Row(
+                          children: [
+                            const Text(
+                              'Информация \nо номере:',
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                color: AppColors.basicGrey1,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Text(
+                              '${state.operator}\n${state.region}',
+                              textAlign: TextAlign.start,
+                              style: const TextStyle(
+                                color: AppColors.primaryBlack,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container(),
                 const SizedBox(height: 24),
                 _SearchInternetButton(
                   active: false,

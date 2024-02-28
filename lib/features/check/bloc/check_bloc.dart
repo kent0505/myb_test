@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myb_test/features/check/check_repository.dart';
 
 import '../../../core/utils.dart';
+import '../check_repository.dart';
 
 part 'check_event.dart';
 part 'check_state.dart';
@@ -51,10 +51,10 @@ class CheckBloc extends Bloc<CheckEvent, CheckState> {
         region = result.region;
 
         emit(CheckResultState(
-          phone!,
-          blocked!,
-          operator!,
-          region!,
+          phone ?? '',
+          blocked ?? 0,
+          operator ?? '',
+          region ?? '',
         ));
       } else {
         emit(CheckInitial());

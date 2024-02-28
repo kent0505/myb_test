@@ -1,14 +1,25 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
+
 import '../../core/constants.dart';
 import '../../core/network/dio_options.dart';
+import '../../core/utils.dart';
 
 class CheckRepository {
   Future<CheckResult> getPhoneInfo(String phone) async {
     try {
       final response = await dio.get(
-        '${Const.phoneInfoUrl}?phone_number=$phone',
-        options: options,
+        '${Const.phoneInfoURL}?phone_number=$phone',
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ${Utils.token}',
+          },
+          receiveTimeout: const Duration(seconds: 5),
+          sendTimeout: const Duration(seconds: 5),
+          validateStatus: (status) => true,
+        ),
       );
 
       log(response.statusCode.toString());
@@ -17,22 +28,19 @@ class CheckRepository {
       if (response.statusCode == 200) {
         return CheckSuccessResult(
           response.data['callfilter_info']['blocked'] ?? 0,
-          response.data['operator_info']['old_operator'] ??
-              response.data['operator_info']['operator'],
+          response.data['operator_info']['operator'] ?? '',
           response.data['operator_info']['region'] ?? '',
         );
-        // if (response.data['operator_info']['info']
-        //     .toString()
-        //     .contains('Номер не найден')) {
-
-        //   return CheckNotFoundResult();
-        // } else {
-        //   return CheckSuccessResult(
-        //     response.data['callfilter_info']['blocked'],
-        //     response.data['operator_info']['old_operator'],
-        //     response.data['operator_info']['region'],
-        //   );
-        // }
+      } else if (response.statusCode == 404) {
+        if (response.data['callfilter_info'] != null) {
+          return CheckSuccessResult(
+            response.data['callfilter_info']['blocked'] ?? 0,
+            '',
+            '',
+          );
+        } else {
+          return CheckErrorResult();
+        }
       } else {
         return CheckErrorResult();
       }

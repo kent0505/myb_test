@@ -4,10 +4,9 @@ import 'package:dio/dio.dart';
 
 import '../../core/constants.dart';
 import '../../core/network/dio_options.dart';
-import 'auth_result.dart';
 
 class AuthRepository {
-  Future<AuthResult> registerGetCode(String phone) async {
+  Future<Result> registerGetCode(String phone) async {
     try {
       final response = await dio.post(
         Const.registerGetCodeURL,
@@ -33,7 +32,7 @@ class AuthRepository {
     }
   }
 
-  Future<AuthResult> login(String phone, String fcm) async {
+  Future<Result> login(String phone, String fcm) async {
     try {
       final response = await dio.post(
         Const.loginURL,
@@ -60,7 +59,7 @@ class AuthRepository {
     }
   }
 
-  Future<AuthResult> register(String phone, String fcm, String reason) async {
+  Future<Result> register(String phone, String fcm, String reason) async {
     try {
       final response = await dio.post(
         Const.registerURL,
@@ -85,7 +84,7 @@ class AuthRepository {
     }
   }
 
-  // Future<AuthResult> checkRegister(String phone) async {
+  // Future<Result> checkRegister(String phone) async {
   //   try {
   //     final response = await dio.post(
   //       Const.registerCheckURL,
@@ -110,4 +109,32 @@ class AuthRepository {
   //     return ExceptionResult(e.toString());
   //   }
   // }
+}
+
+abstract class Result {}
+
+class RegisteredResult extends Result {
+  final bool registered;
+  RegisteredResult(this.registered);
+}
+
+class SuccessResult extends Result {
+  final String token;
+  SuccessResult(this.token);
+}
+
+class ErrorResult extends Result {}
+
+class CodeResult extends Result {
+  final int code;
+  final bool registered;
+  CodeResult(
+    this.code,
+    this.registered,
+  );
+}
+
+class ExceptionResult extends Result {
+  final String error;
+  ExceptionResult(this.error);
 }

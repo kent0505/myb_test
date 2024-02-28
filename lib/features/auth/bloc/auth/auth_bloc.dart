@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils.dart';
 import '../../auth_repository.dart';
-import '../../auth_result.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -29,7 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           .replaceAll(') ', '')
           .replaceAll('-', '');
       if (phone != null) {
-        AuthResult result = await _repository.registerGetCode(phone!);
+        Result result = await _repository.registerGetCode(phone!);
         if (result is CodeResult) {
           otp = result.code.toString();
           registered = result.registered;
@@ -42,7 +41,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<CheckOtpEvent>((event, emit) async {
       if (event.otp == otp) {
         if (registered == true) {
-          AuthResult result = await _repository.login(phone!, Utils.fcmToken);
+          Result result = await _repository.login(phone!, Utils.fcmToken);
           if (result is SuccessResult) {
             await Utils.saveData('token', result.token);
             await Utils.getTokens();
@@ -64,7 +63,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         reason = 'protection';
       }
-      AuthResult result = await _repository.register(
+      Result result = await _repository.register(
         phone ?? '',
         Utils.fcmToken,
         reason,
