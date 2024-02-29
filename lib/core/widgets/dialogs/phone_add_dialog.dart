@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../features/mydb/bloc/mydb_bloc.dart';
 import '../../app_colors.dart';
 import '../../utils.dart';
 import '../buttons/border_button.dart';
@@ -34,6 +35,14 @@ class _PhoneAddDialogState extends State<PhoneAddDialog> {
     for (var category in Utils.categories) {
       if (category.checked) {
         cid.add(category.id);
+      }
+    }
+  }
+
+  void deactivateSwitches() {
+    for (var category in Utils.categories) {
+      if (category.checked) {
+        category.checked = false;
       }
     }
   }
@@ -98,6 +107,7 @@ class _PhoneAddDialogState extends State<PhoneAddDialog> {
                       active: true,
                       onPressed: () {
                         context.go('/home');
+                        deactivateSwitches();
                       },
                     ),
                     const SizedBox(height: 24),
@@ -152,6 +162,8 @@ class _PhoneAddDialogState extends State<PhoneAddDialog> {
                       active: true,
                       onPressed: () {
                         context.go('/home');
+                        context.read<MydbBloc>().add(GetBlacklistEvent());
+                        deactivateSwitches();
                       },
                     ),
                     const SizedBox(height: 24),
