@@ -107,6 +107,7 @@ class _ContactPageState extends State<ContactPage> {
             const SizedBox(height: 10),
             TxtField(
               controller: controller3,
+              hintText: 'Текст обращения',
               onChanged: () {
                 context.read<SettingsBloc>().add(CheckEvent());
               },

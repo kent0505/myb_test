@@ -1,12 +1,13 @@
-import 'package:blocker/core/widgets/dialogs/phone_add_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/app_colors.dart';
 import '../../../core/utils.dart';
 import '../../../core/widgets/appbar/app_bar_widget.dart';
 import '../../../core/widgets/buttons/border_button.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
+import '../../../core/widgets/dialogs/phone_add_dialog.dart';
 import '../../../core/widgets/loading/loading_widget.dart';
 import '../../../core/widgets/textfields/phone_field.dart';
 import '../bloc/check_bloc.dart';
@@ -104,7 +105,9 @@ class _CheckResultPageState extends State<CheckResultPage> {
                             child: BorderButton(
                               title: 'Не спам',
                               active: true,
-                              onPressed: () {},
+                              onPressed: () {
+                                context.pop();
+                              },
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -116,10 +119,15 @@ class _CheckResultPageState extends State<CheckResultPage> {
                               onPressed: () async {
                                 await showDialog(
                                   context: context,
+                                  barrierDismissible: false,
                                   builder: (context) => PhoneAddDialog(
                                     phone: state.phone,
                                   ),
                                 );
+                                // await showDialog(
+                                //   context: context,
+                                //   builder: (context) => const StatusDialog(),
+                                // );
                               },
                             ),
                           ),

@@ -120,6 +120,7 @@ class ResultCardWidget extends StatelessWidget {
               ? Padding(
                   padding: const EdgeInsets.only(top: 24),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'Информация \nо номере:',
@@ -131,13 +132,27 @@ class ResultCardWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 16),
-                      Text(
-                        '$operator\n$region',
-                        textAlign: TextAlign.start,
-                        style: const TextStyle(
-                          color: AppColors.primaryBlack,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              operator,
+                              style: const TextStyle(
+                                color: AppColors.primaryBlack,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                              ),
+                            ),
+                            Text(
+                              region,
+                              style: const TextStyle(
+                                color: AppColors.primaryBlack,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

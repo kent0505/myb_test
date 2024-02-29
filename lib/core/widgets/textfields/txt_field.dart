@@ -7,10 +7,12 @@ class TxtField extends StatelessWidget {
   const TxtField({
     super.key,
     required this.controller,
+    required this.hintText,
     required this.onChanged,
   });
 
   final TextEditingController controller;
+  final String hintText;
   final void Function() onChanged;
 
   @override
@@ -45,7 +47,7 @@ class TxtField extends StatelessWidget {
         cursorWidth: 1,
         style: const TextStyle(fontSize: 13),
         decoration: InputDecoration(
-          hintText: 'Текст обращения',
+          hintText: hintText,
           hintStyle: const TextStyle(
             color: AppColors.basicGrey4,
             fontSize: 13,

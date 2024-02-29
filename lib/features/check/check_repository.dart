@@ -49,6 +49,26 @@ class CheckRepository {
       return CheckErrorResult();
     }
   }
+
+  Future addToBlacklist() async {
+    try {
+      final response = await dio.post(
+        '${Const.phoneInfoURL}?phone_number',
+        options: options,
+      );
+
+      log(response.statusCode.toString());
+      print(response.data);
+
+      if (response.statusCode == 200) {
+      } else {
+        return CheckErrorResult();
+      }
+    } catch (e) {
+      print(e);
+      return CheckErrorResult();
+    }
+  }
 }
 
 abstract class CheckResult {}
