@@ -6,6 +6,10 @@ class CheckInitial extends CheckState {}
 
 class CheckLoadingState extends CheckState {}
 
+class AddedState extends CheckState {}
+
+class ErrorState extends CheckState {}
+
 class CheckResultState extends CheckState {
   final String phone;
   final int blocked;

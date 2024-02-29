@@ -7,7 +7,7 @@ import '../../core/network/dio_options.dart';
 import '../../core/utils.dart';
 
 class CheckRepository {
-  Future<CheckResult> getPhoneInfo(String phone) async {
+  Future<Result> getPhoneInfo(String phone) async {
     try {
       final response = await dio.get(
         '${Const.phoneInfoURL}?phone_number=$phone',
@@ -50,17 +50,27 @@ class CheckRepository {
     }
   }
 
-  Future addToBlacklist() async {
+  Future<Result> addToBlacklist(
+    String phone,
+    List<int> categories,
+    String comment,
+  ) async {
     try {
       final response = await dio.post(
-        '${Const.phoneInfoURL}?phone_number',
+        Const.addToBlackListURL,
+        data: {
+          'phone_number': phone,
+          'categories': categories,
+          'comment': comment,
+        },
         options: options,
       );
 
       log(response.statusCode.toString());
       print(response.data);
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
+        return AddedResult();
       } else {
         return CheckErrorResult();
       }
@@ -71,9 +81,9 @@ class CheckRepository {
   }
 }
 
-abstract class CheckResult {}
+abstract class Result {}
 
-class CheckSuccessResult extends CheckResult {
+class CheckSuccessResult extends Result {
   final int blocked;
   final String operator;
   final String region;
@@ -84,6 +94,8 @@ class CheckSuccessResult extends CheckResult {
   );
 }
 
-class CheckNotFoundResult extends CheckResult {}
+class AddedResult extends Result {}
 
-class CheckErrorResult extends CheckResult {}
+class CheckNotFoundResult extends Result {}
+
+class CheckErrorResult extends Result {}

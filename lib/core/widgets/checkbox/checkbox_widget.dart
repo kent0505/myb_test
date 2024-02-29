@@ -24,12 +24,13 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       // onTap: () {
       //   setState(() {
       //     checked = !checked;
       //   });
       // },
+      splashColor: Colors.transparent,
       onTap: widget.onTap,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 9),

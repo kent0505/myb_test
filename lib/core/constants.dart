@@ -6,6 +6,7 @@ class Const {
   static String registerGetCodeURL = '$baseURL/users/registration_get_code/';
   static String categoryURL = '$baseURL/categories/';
   static String blackListURL = '$baseURL/blacklist/user-list/';
+  static String addToBlackListURL = '$baseURL/blacklist/';
   static String helpURL = '$baseURL/legal_help/consultation_requests/';
   static String appealURL = '$baseURL/users/contact-us/';
   static String phoneInfoURL = '$baseURL/callfilter_api/check-phone/';

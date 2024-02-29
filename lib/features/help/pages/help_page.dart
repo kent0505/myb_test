@@ -35,6 +35,7 @@ class _HelpPageState extends State<HelpPage> {
   Widget build(BuildContext context) {
     print('BUILD HELP PAGE');
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 21),
         child: Column(

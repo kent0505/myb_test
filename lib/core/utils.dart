@@ -1,6 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import '../features/menu/models/category.dart';
+
 // Временный файл, потом сделаю поправки
 
 class Utils {
@@ -14,6 +16,8 @@ class Utils {
   static bool txtValid = false;
   static bool warn = false;
   static bool block = false;
+
+  static List<Category> categories = [];
 
   static Future<void> getTokens() async {
     final prefs = await SharedPreferences.getInstance();

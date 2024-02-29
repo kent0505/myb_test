@@ -35,7 +35,7 @@ class CheckBloc extends Bloc<CheckEvent, CheckState> {
 
       emit(CheckLoadingState());
 
-      CheckResult result = await _repository.getPhoneInfo(
+      Result result = await _repository.getPhoneInfo(
         event.phone
             .replaceAll('+', '')
             .replaceAll(' (', '')
@@ -58,6 +58,38 @@ class CheckBloc extends Bloc<CheckEvent, CheckState> {
         ));
       } else {
         emit(CheckInitial());
+      }
+    });
+
+    on<AddToBlacklistEvent>((event, emit) async {
+      emit(CheckLoadingState());
+
+      phone = event.phone
+          .replaceAll(' (', '')
+          .replaceAll(') ', '')
+          .replaceAll('-', '');
+
+      print(phone);
+      print(event.categories);
+      print(event.comment);
+      // await Future.delayed(const Duration(seconds: 2));
+
+      // emit(ErrorState());
+
+      // await Future.delayed(const Duration(seconds: 2));
+
+      // emit(AddedState());
+
+      Result result = await _repository.addToBlacklist(
+        phone!,
+        event.categories,
+        event.comment,
+      );
+
+      if (result is AddedResult) {
+        emit(AddedState());
+      } else {
+        emit(ErrorState());
       }
     });
   }

@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/utils.dart';
 import '../menu_repository.dart';
 import '../models/category.dart';
 
@@ -16,6 +17,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
       Result result = await _repository.fetchCategories();
 
       if (result is CategoriesResult) {
+        Utils.categories = result.categories;
         emit(MenuLoadedState(result.categories));
       } else {
         emit(MenuLoadedState([]));
