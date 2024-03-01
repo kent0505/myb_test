@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import '../features/menu/models/category.dart';
+import '../features/mydb/models/phone.dart';
 
 // Временный файл, потом сделаю поправки
 
@@ -18,6 +19,65 @@ class Utils {
   static bool block = false;
 
   static List<Category> categories = [];
+  static List<Phone> blacklist = [];
+  static List<int> cid = [];
+
+  static void clearData() {
+    for (var category in Utils.categories) {
+      if (category.checked) {
+        category.checked = false;
+      }
+    }
+    for (var phone in Utils.blacklist) {
+      if (phone.checked) {
+        phone.checked = false;
+      }
+    }
+  }
+
+  static void getCid() {
+    cid = [];
+    for (var category in Utils.categories) {
+      if (category.checked) {
+        cid.add(category.id);
+      }
+    }
+  }
+
+  static void deactivateSwitches() {
+    for (var category in Utils.categories) {
+      if (category.checked) {
+        category.checked = false;
+      }
+    }
+  }
+
+  static bool checkActiveCheckboxes() {
+    for (var category in Utils.categories) {
+      if (category.checked) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static bool checkActiveCheckboxes2() {
+    for (var category in Utils.categories) {
+      if (category.checked && phoneValid) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static bool phoneChecked() {
+    for (var phone in blacklist) {
+      if (phone.checked) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   static Future<void> getTokens() async {
     final prefs = await SharedPreferences.getInstance();

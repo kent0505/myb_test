@@ -5,6 +5,7 @@ import '../../core/app_colors.dart';
 import '../../core/widgets/buttons/border_button.dart';
 import '../../core/widgets/buttons/yellow_button.dart';
 import '../../core/widgets/checkbox/checkbox_widget.dart';
+import '../../core/widgets/dialogs/info_dialog.dart';
 import '../../core/widgets/loading/loading_widget.dart';
 import '../home/bloc/home_bloc.dart';
 import 'bloc/menu_bloc.dart';
@@ -117,13 +118,20 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
-                YellowButton(
-                  title: 'Обновить базу',
-                  active: true,
-                  onPressed: () {
-                    context.read<MenuBloc>().add(GetCategoriesEvent());
-                  },
+                const SizedBox(height: 14),
+                const _InfoButton(),
+                const SizedBox(height: 4),
+                // const SizedBox(height: 24),
+                Stack(
+                  children: [
+                    YellowButton(
+                      title: 'Обновить базу',
+                      active: true,
+                      onPressed: () {
+                        context.read<MenuBloc>().add(GetCategoriesEvent());
+                      },
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 16),
                 BorderButton(
@@ -140,6 +148,40 @@ class _MenuPageState extends State<MenuPage> {
 
           return Container();
         },
+      ),
+    );
+  }
+}
+
+class _InfoButton extends StatelessWidget {
+  const _InfoButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Material(
+        borderRadius: BorderRadius.circular(50),
+        child: InkWell(
+          onTap: () async {
+            await showDialog(
+              context: context,
+              builder: (context) => const InfoDialog(),
+            );
+          },
+          borderRadius: BorderRadius.circular(50),
+          child: Ink(
+            height: 20,
+            width: 20,
+            decoration: BoxDecoration(
+              border: Border.all(width: 1, color: Colors.black),
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: const Center(
+              child: Text('?'),
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -37,6 +37,7 @@ class _CheckResultPageState extends State<CheckResultPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 21),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
             const Text(
@@ -124,10 +125,6 @@ class _CheckResultPageState extends State<CheckResultPage> {
                                     phone: state.phone,
                                   ),
                                 );
-                                // await showDialog(
-                                //   context: context,
-                                //   builder: (context) => const StatusDialog(),
-                                // );
                               },
                             ),
                           ),

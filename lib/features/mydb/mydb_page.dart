@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/app_colors.dart';
+import '../../core/utils.dart';
 import '../../core/widgets/buttons/border_button.dart';
 import '../../core/widgets/buttons/yellow_button.dart';
 import '../../core/widgets/checkbox/checkbox_widget.dart';
+import '../../core/widgets/dialogs/phone_add_dialog2.dart';
 import '../../core/widgets/loading/loading_widget.dart';
 import 'bloc/mydb_bloc.dart';
 
@@ -88,16 +90,26 @@ class _MydbPageState extends State<MydbPage> {
                           radius: const Radius.circular(18),
                           thumbVisibility: true,
                           scrollbarOrientation: ScrollbarOrientation.right,
-                          child: ListView.builder(
-                            controller: scrollController,
-                            shrinkWrap: true,
-                            itemCount: state.blacklist.length,
-                            itemBuilder: (context, index) {
-                              return CheckboxWidget(
-                                title: state.blacklist[index].phone,
-                                checked: false,
-                              );
+                          child: RefreshIndicator(
+                            onRefresh: () async {
+                              context.read<MydbBloc>().add(GetBlacklistEvent());
                             },
+                            child: ListView.builder(
+                              controller: scrollController,
+                              shrinkWrap: true,
+                              itemCount: state.blacklist.length,
+                              itemBuilder: (context, index) {
+                                return CheckboxWidget(
+                                  title: state.blacklist[index].phone,
+                                  checked: state.blacklist[index].checked,
+                                  onTap: () {
+                                    context
+                                        .read<MydbBloc>()
+                                        .add(CheckboxEvent(index));
+                                  },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -112,8 +124,10 @@ class _MydbPageState extends State<MydbPage> {
                     Expanded(
                       child: BorderButton(
                         title: 'Удалить',
-                        active: false,
-                        onPressed: () {},
+                        active: Utils.phoneChecked(),
+                        onPressed: () {
+                          context.read<MydbBloc>().add(DeletePhoneEvent());
+                        },
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -122,7 +136,14 @@ class _MydbPageState extends State<MydbPage> {
                         title: 'Добавить',
                         icon: 'plus-circle',
                         active: true,
-                        onPressed: () {},
+                        onPressed: () async {
+                          // open dialog
+                          await showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => const PhoneAddDialog2(),
+                          );
+                        },
                       ),
                     ),
                   ],

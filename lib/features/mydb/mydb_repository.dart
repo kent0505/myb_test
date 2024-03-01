@@ -17,11 +17,11 @@ class MydbRepository {
 
       if (response.statusCode == 200) {
         final List result = response.data;
-        final phones = result.map((item) {
+        final blacklist = result.map((item) {
           return Phone.fromJson(item);
         }).toList();
 
-        return PhonesResult(phones);
+        return BlacklistResult(blacklist);
       } else {
         return ErrorResult();
       }
@@ -30,13 +30,36 @@ class MydbRepository {
       return ErrorResult();
     }
   }
+
+  Future<Result> deletePhones(List<String> phones) async {
+    try {
+      final response = await dio.delete(
+        '${Const.baseURL}/blacklist/',
+        data: {'phone_numbers': phones},
+        options: options,
+      );
+
+      log(response.statusCode.toString());
+      print(response.data);
+
+      if (response.statusCode == 204) {
+        return SuccessResult();
+      } else {
+        return ErrorResult();
+      }
+    } catch (e) {
+      return ErrorResult();
+    }
+  }
 }
 
 abstract class Result {}
 
-class PhonesResult extends Result {
+class BlacklistResult extends Result {
   final List<Phone> blacklist;
-  PhonesResult(this.blacklist);
+  BlacklistResult(this.blacklist);
 }
+
+class SuccessResult extends Result {}
 
 class ErrorResult extends Result {}

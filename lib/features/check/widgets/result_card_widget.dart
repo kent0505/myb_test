@@ -77,38 +77,41 @@ class ResultCardWidget extends StatelessWidget {
                     spacing: 4,
                     runSpacing: 4,
                     children: [
+                      // for (var category in Utils.categories) ...[
+                      //   if (category.id == )
+                      // ]
+                      // _ResultCategoryWidget(
+                      //   text: 'Коллектор',
+                      //   textColor: AppColors.brandRed,
+                      //   containerColor: Color(0x1af4404c),
+                      //   containerWidth: 70,
+                      // ),
+                      // _ResultCategoryWidget(
+                      //   text: 'Кредитор',
+                      //   textColor: AppColors.brandRed,
+                      //   containerColor: Color(0x1af4404c),
+                      //   containerWidth: 70,
+                      // ),
+                      // _ResultCategoryWidget(
+                      //   text: 'Мошенники  ',
+                      //   textColor: AppColors.brandRed,
+                      //   containerColor: Color(0x1af4404c),
+                      //   containerWidth: 80,
+                      // ),
+                      // _ResultCategoryWidget(
+                      //   text: 'Спам',
+                      //   textColor: AppColors.statusOrange,
+                      //   containerColor: Color(0x2aFB8D0F),
+                      //   containerWidth: 50,
+                      // ),
+                      // _ResultCategoryWidget(
+                      //   text: 'Риелторы',
+                      //   textColor: AppColors.brandSky,
+                      //   containerColor: Color(0x3300B2FF),
+                      //   containerWidth: 70,
+                      // ),
                       _ResultCategoryWidget(
-                        text: 'Коллектор',
-                        textColor: AppColors.brandRed,
-                        containerColor: Color(0x1af4404c),
-                        containerWidth: 70,
-                      ),
-                      _ResultCategoryWidget(
-                        text: 'Кредитор',
-                        textColor: AppColors.brandRed,
-                        containerColor: Color(0x1af4404c),
-                        containerWidth: 70,
-                      ),
-                      _ResultCategoryWidget(
-                        text: 'Мошенники  ',
-                        textColor: AppColors.brandRed,
-                        containerColor: Color(0x1af4404c),
-                        containerWidth: 80,
-                      ),
-                      _ResultCategoryWidget(
-                        text: 'Спам',
-                        textColor: AppColors.statusOrange,
-                        containerColor: Color(0x2aFB8D0F),
-                        containerWidth: 50,
-                      ),
-                      _ResultCategoryWidget(
-                        text: 'Риелторы',
-                        textColor: AppColors.brandSky,
-                        containerColor: Color(0x3300B2FF),
-                        containerWidth: 70,
-                      ),
-                      _ResultCategoryWidget(
-                        text: 'Реклама',
+                        text: 'Другое',
                         textColor: AppColors.statusOrange,
                         containerColor: Color(0x20FB8D0F),
                         containerWidth: 70,

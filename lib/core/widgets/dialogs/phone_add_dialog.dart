@@ -1,17 +1,17 @@
-import 'package:blocker/core/widgets/loading/loading_widget.dart';
-import 'package:blocker/features/check/bloc/check_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../features/mydb/bloc/mydb_bloc.dart';
+import '../../../features/check/bloc/check_bloc.dart';
 import '../../app_colors.dart';
 import '../../utils.dart';
 import '../buttons/border_button.dart';
 import '../buttons/yellow_button.dart';
 import '../checkbox/checkbox_widget.dart';
 import '../textfields/txt_field.dart';
+import 'widgets/error_dialog_widget.dart';
+import 'widgets/loading_dialog_widget.dart';
+import 'widgets/success_dialog_widget.dart';
 
 class PhoneAddDialog extends StatefulWidget {
   const PhoneAddDialog({
@@ -28,32 +28,25 @@ class PhoneAddDialog extends StatefulWidget {
 class _PhoneAddDialogState extends State<PhoneAddDialog> {
   final controller = TextEditingController();
   final scrollController = ScrollController();
-  List<int> cid = [];
 
-  void getCid() {
-    cid = [];
-    for (var category in Utils.categories) {
-      if (category.checked) {
-        cid.add(category.id);
-      }
-    }
+  void checkboxButton(int index) {
+    setState(() {
+      Utils.categories[index].checked = !Utils.categories[index].checked;
+    });
+    Utils.getCid();
   }
 
-  void deactivateSwitches() {
-    for (var category in Utils.categories) {
-      if (category.checked) {
-        category.checked = false;
-      }
-    }
+  void cancelButton() {
+    context.pop();
+    Utils.clearData();
   }
 
-  bool checkActiveSwitches() {
-    for (var category in Utils.categories) {
-      if (category.checked) {
-        return true;
-      }
-    }
-    return false;
+  void addButton() {
+    context.read<CheckBloc>().add(AddToBlacklistEvent(
+          widget.phone,
+          Utils.cid,
+          controller.text,
+        ));
   }
 
   @override
@@ -74,108 +67,20 @@ class _PhoneAddDialogState extends State<PhoneAddDialog> {
         child: BlocBuilder<CheckBloc, CheckState>(
           builder: (context, state) {
             if (state is CheckLoadingState) {
-              return const SizedBox(
-                height: 342,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    LoadingWidget(),
-                  ],
-                ),
-              );
+              return const LoadingDialogWidget();
             }
 
             if (state is ErrorState) {
-              return SizedBox(
-                height: 342,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Spacer(),
-                    const Text(
-                      'Произошла ошибка!',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.primaryText,
-                      ),
-                    ),
-                    const Spacer(),
-                    YellowButton(
-                      title: 'В главное меню',
-                      active: true,
-                      onPressed: () {
-                        context.go('/home');
-                        deactivateSwitches();
-                      },
-                    ),
-                    const SizedBox(height: 24),
-                  ],
-                ),
-              );
+              return const ErrorDialogWidget();
             }
 
             if (state is AddedState) {
-              return SizedBox(
-                height: 342,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(height: 40),
-                    SvgPicture.asset(
-                      'assets/icons/check-circle-2.svg',
-                      height: 65,
-                      width: 65,
-                    ),
-                    const SizedBox(height: 18),
-                    const Text(
-                      'Номер добавлен в спам!',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.primaryText,
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    const Text(
-                      'Спасибо, что пополняете базу\nнежелательных номеров.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.primaryBlack,
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    const Text(
-                      'Это поможет другим пользователям.',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.basicGrey1,
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    YellowButton(
-                      title: 'В главное меню',
-                      active: true,
-                      onPressed: () {
-                        context.go('/home');
-                        context.read<MydbBloc>().add(GetBlacklistEvent());
-                        deactivateSwitches();
-                      },
-                    ),
-                    const SizedBox(height: 24),
-                  ],
-                ),
-              );
+              return const SuccessDialogWidget();
             }
 
             return SingleChildScrollView(
               reverse: true,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 900),
+              child: SizedBox(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -229,13 +134,7 @@ class _PhoneAddDialogState extends State<PhoneAddDialog> {
                               title: Utils.categories[index].name,
                               checked: Utils.categories[index].checked,
                               onTap: () {
-                                setState(() {
-                                  Utils.categories[index].checked =
-                                      !Utils.categories[index].checked;
-                                });
-                                getCid();
-                                print(cid);
-                                print(Utils.categories[index].id);
+                                checkboxButton(index);
                               },
                             );
                           },
@@ -255,23 +154,15 @@ class _PhoneAddDialogState extends State<PhoneAddDialog> {
                           child: BorderButton(
                             title: 'Отменить',
                             active: true,
-                            onPressed: () {
-                              context.pop();
-                            },
+                            onPressed: cancelButton,
                           ),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: YellowButton(
                             title: 'Готово',
-                            active: checkActiveSwitches(),
-                            onPressed: () {
-                              context.read<CheckBloc>().add(AddToBlacklistEvent(
-                                    widget.phone,
-                                    cid,
-                                    controller.text,
-                                  ));
-                            },
+                            active: Utils.checkActiveCheckboxes(),
+                            onPressed: addButton,
                           ),
                         ),
                       ],
@@ -284,23 +175,6 @@ class _PhoneAddDialogState extends State<PhoneAddDialog> {
           },
         ),
       ),
-      // child: Stack(
-      //   children: [
-
-      //     Positioned(
-      //       top: 12,
-      //       right: 12,
-      //       child: InkWell(
-      //         onTap: () {
-      //           context.pop();
-      //         },
-      //         child: SvgPicture.asset(
-      //           'assets/icons/x.svg',
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }
