@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/app_colors.dart';
+import '../../core/widgets/appbar/yellow_line_widget.dart';
 import '../../core/widgets/buttons/border_button.dart';
 import '../../core/widgets/buttons/yellow_button.dart';
 import '../../core/widgets/checkbox/checkbox_widget.dart';
-import '../../core/widgets/dialogs/info_dialog.dart';
+import '../dialog/pages/menu_page_dialog.dart';
 import '../../core/widgets/loading/loading_widget.dart';
 import '../home/bloc/home_bloc.dart';
 import 'bloc/menu_bloc.dart';
@@ -28,65 +29,60 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('BUILD MENU PAGE');
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 21),
-      child: BlocBuilder<MenuBloc, MenuState>(
-        builder: (context, state) {
-          if (state is MenuLoadingState) {
-            return const LoadingWidget();
-          }
-
-          if (state is MenuLoadedState) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 30),
-                Stack(
-                  children: [
-                    const Text(
-                      'Какие звонки \nВы хотите блокировать?',
-                      style: TextStyle(
-                        color: AppColors.basicBlack3,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    Positioned(
-                      top: 2,
-                      left: 56,
-                      child: Container(
-                        height: 3,
-                        width: 58,
-                        color: AppColors.primaryOrange,
-                      ),
-                    ),
-                  ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 30),
+          const Stack(
+            children: [
+              Text(
+                'Какие звонки \nВы хотите блокировать?',
+                style: TextStyle(
+                  color: AppColors.basicBlack3,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
                 ),
-                const SizedBox(height: 24),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 20,
-                        color: Color(0xffdee6ef),
-                        offset: Offset(0, 0),
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 15,
-                    ),
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(
-                        minHeight: 130,
-                        maxHeight: 408,
-                      ),
-                      child: RawScrollbar(
+              ),
+              YellowLineWidget(
+                width: 58,
+                top: 2,
+                left: 56,
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                  blurRadius: 20,
+                  color: Color(0xffdee6ef),
+                  offset: Offset(0, 0),
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 15,
+              ),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  minHeight: 374,
+                  maxHeight: 374,
+                ),
+                child: BlocBuilder<MenuBloc, MenuState>(
+                  builder: (context, state) {
+                    if (state is MenuLoadingState) {
+                      return const LoadingWidget();
+                    }
+
+                    if (state is MenuLoadedState) {
+                      return RawScrollbar(
                         controller: scrollController,
                         thumbColor: AppColors.basicWhite2,
                         thickness: 5,
@@ -114,40 +110,39 @@ class _MenuPageState extends State<MenuPage> {
                             ],
                           ],
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 14),
-                const _InfoButton(),
-                const SizedBox(height: 4),
-                // const SizedBox(height: 24),
-                Stack(
-                  children: [
-                    YellowButton(
-                      title: 'Обновить базу',
-                      active: true,
-                      onPressed: () {
-                        context.read<MenuBloc>().add(GetCategoriesEvent());
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                BorderButton(
-                  title: 'Блокировать / Предупреждать',
-                  active: true,
-                  onPressed: () {
-                    context.read<HomeBloc>().add(ChangePageEvent(4));
+                      );
+                    }
+
+                    return Container();
                   },
                 ),
-                const SizedBox(height: 20),
-              ],
-            );
-          }
-
-          return Container();
-        },
+              ),
+            ),
+          ),
+          const SizedBox(height: 14),
+          const _InfoButton(),
+          const SizedBox(height: 4),
+          Stack(
+            children: [
+              YellowButton(
+                title: 'Обновить базу',
+                active: true,
+                onPressed: () {
+                  context.read<MenuBloc>().add(GetCategoriesEvent());
+                },
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          BorderButton(
+            title: 'Блокировать / Предупреждать',
+            active: true,
+            onPressed: () {
+              context.read<HomeBloc>().add(ChangePageEvent(4));
+            },
+          ),
+          const SizedBox(height: 20),
+        ],
       ),
     );
   }
@@ -166,7 +161,7 @@ class _InfoButton extends StatelessWidget {
           onTap: () async {
             await showDialog(
               context: context,
-              builder: (context) => const InfoDialog(),
+              builder: (context) => const MenuPageDialog(),
             );
           },
           borderRadius: BorderRadius.circular(50),

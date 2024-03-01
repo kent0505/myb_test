@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app_colors.dart';
-import '../buttons/yellow_button.dart';
+import '../../../core/app_colors.dart';
+import '../../../core/widgets/buttons/yellow_button.dart';
 
-class InfoDialog extends StatelessWidget {
-  const InfoDialog({super.key});
+class MenuPageDialog extends StatelessWidget {
+  const MenuPageDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

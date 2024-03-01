@@ -7,9 +7,9 @@ import '../../../core/utils.dart';
 import '../../../core/widgets/appbar/app_bar_widget.dart';
 import '../../../core/widgets/buttons/border_button.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
-import '../../../core/widgets/dialogs/phone_add_dialog.dart';
 import '../../../core/widgets/loading/loading_widget.dart';
 import '../../../core/widgets/textfields/phone_field.dart';
+import '../../dialog/pages/check_page_dialog.dart';
 import '../bloc/check_bloc.dart';
 import '../widgets/result_card_widget.dart';
 
@@ -121,8 +121,9 @@ class _CheckResultPageState extends State<CheckResultPage> {
                                 await showDialog(
                                   context: context,
                                   barrierDismissible: false,
-                                  builder: (context) => PhoneAddDialog(
+                                  builder: (context) => CheckPageDialog(
                                     phone: state.phone,
+                                    blocked: state.blocked,
                                   ),
                                 );
                               },

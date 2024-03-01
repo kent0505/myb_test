@@ -35,14 +35,17 @@ final routerConfig = GoRouter(
     GoRoute(
       path: '/phone',
       builder: (context, state) => const PhonePage(),
+      onExit: (context) => true,
     ),
     GoRoute(
       path: '/otp',
       builder: (context, state) => const OtpPage(),
+      onExit: (context) => true,
     ),
     GoRoute(
       path: '/reason',
       builder: (context, state) => const ReasonPage(),
+      onExit: (context) => true,
     ),
     GoRoute(
       path: '/home',

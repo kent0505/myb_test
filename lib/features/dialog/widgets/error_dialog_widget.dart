@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../app_colors.dart';
-import '../../buttons/yellow_button.dart';
+import '../../../core/app_colors.dart';
+import '../../../core/widgets/buttons/yellow_button.dart';
+import '../bloc/dialog_bloc.dart';
 
 class ErrorDialogWidget extends StatelessWidget {
   const ErrorDialogWidget({super.key});
@@ -29,7 +31,7 @@ class ErrorDialogWidget extends StatelessWidget {
             active: true,
             onPressed: () {
               context.pop();
-              // deactivateSwitches();
+              context.read<DialogBloc>().add(ChangeStateEvent());
             },
           ),
           const SizedBox(height: 24),

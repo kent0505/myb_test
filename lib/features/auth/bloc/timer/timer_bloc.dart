@@ -15,7 +15,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
       add(DecrementEvent());
       _timer = Timer.periodic(const Duration(seconds: 1), (_) {
         add(DecrementEvent());
-        print(seconds);
+        print('Second = $seconds');
       });
     });
 

@@ -36,8 +36,6 @@ class MydbBloc extends Bloc<MydbEvent, MydbState> {
     });
 
     on<DeletePhoneEvent>((event, emit) async {
-      emit(MydbLodingState());
-
       List<String> phones = [];
 
       for (var phone in Utils.blacklist) {
@@ -46,16 +44,17 @@ class MydbBloc extends Bloc<MydbEvent, MydbState> {
         }
       }
 
-      print(phones);
-      emit(MydbLoaded(Utils.blacklist));
+      emit(MydbLodingState());
 
-      // Result result = await _repository.deletePhones(phones);
+      await Future.delayed(const Duration(seconds: 2));
 
-      // if (result is SuccessResult) {
-      //   add(GetBlacklistEvent());
-      // } else {
-      //   emit(MydbLoaded(Utils.blacklist));
-      // }
+      Result result = await _repository.deletePhones(phones);
+
+      if (result is SuccessResult) {
+        add(GetBlacklistEvent());
+      } else {
+        emit(MydbLoaded(Utils.blacklist));
+      }
     });
   }
 }

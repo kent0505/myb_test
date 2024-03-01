@@ -22,32 +22,28 @@ class Utils {
   static List<Phone> blacklist = [];
   static List<int> cid = [];
 
-  static void clearData() {
-    for (var category in Utils.categories) {
-      if (category.checked) {
-        category.checked = false;
-      }
-    }
-    for (var phone in Utils.blacklist) {
-      if (phone.checked) {
-        phone.checked = false;
-      }
-    }
+  static String formatPhone(String phone) {
+    return phone.replaceAll(' (', '').replaceAll(') ', '').replaceAll('-', '');
   }
+
+  // static void clearData() {
+  //   for (var category in Utils.categories) {
+  //     if (category.checked) {
+  //       category.checked = false;
+  //     }
+  //   }
+  //   for (var phone in Utils.blacklist) {
+  //     if (phone.checked) {
+  //       phone.checked = false;
+  //     }
+  //   }
+  // }
 
   static void getCid() {
     cid = [];
     for (var category in Utils.categories) {
       if (category.checked) {
         cid.add(category.id);
-      }
-    }
-  }
-
-  static void deactivateSwitches() {
-    for (var category in Utils.categories) {
-      if (category.checked) {
-        category.checked = false;
       }
     }
   }

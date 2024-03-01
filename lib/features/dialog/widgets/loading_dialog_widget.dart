@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../loading/loading_widget.dart';
+import '../../../core/widgets/loading/loading_widget.dart';
 
 class LoadingDialogWidget extends StatelessWidget {
   const LoadingDialogWidget({super.key});

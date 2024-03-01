@@ -47,10 +47,14 @@ class _PhonePageState extends State<PhonePage> {
                 ),
               ),
               const SizedBox(height: 8),
-              PhoneField(
-                controller: controller,
-                onChanged: () {
-                  context.read<AuthBloc>().add(CheckEvent());
+              BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  return PhoneField(
+                    controller: controller,
+                    onChanged: () {
+                      context.read<AuthBloc>().add(CheckEvent());
+                    },
+                  );
                 },
               ),
               const SizedBox(height: 30),
@@ -69,6 +73,7 @@ class _PhonePageState extends State<PhonePage> {
                         context
                             .read<AuthBloc>()
                             .add(LoginEvent(controller.text));
+                        controller.clear();
                       },
                     );
                   },

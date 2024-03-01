@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/app_colors.dart';
 import '../../../core/utils.dart';
+import '../../../core/widgets/appbar/yellow_line_widget.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/textfields/phone_field.dart';
 import '../bloc/check_bloc.dart';
@@ -33,9 +34,9 @@ class _CheckPageState extends State<CheckPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Stack(
+            const Stack(
               children: [
-                const Text(
+                Text(
                   'Узнайте, кто вам звонил',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -44,14 +45,10 @@ class _CheckPageState extends State<CheckPage> {
                     fontSize: 24,
                   ),
                 ),
-                Positioned(
+                YellowLineWidget(
+                  width: 115,
                   top: 2,
                   right: 0,
-                  child: Container(
-                    height: 3,
-                    width: 115,
-                    color: AppColors.primaryOrange,
-                  ),
                 ),
               ],
             ),

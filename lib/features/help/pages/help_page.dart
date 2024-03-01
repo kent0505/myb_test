@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/app_colors.dart';
 import '../../../core/utils.dart';
+import '../../../core/widgets/appbar/yellow_line_widget.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/textfields/email_field.dart';
 import '../../../core/widgets/textfields/name_field.dart';
@@ -54,9 +55,9 @@ class _HelpPageState extends State<HelpPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Stack(
+                const Stack(
                   children: [
-                    const Text(
+                    Text(
                       'Поможем выйти \nиз трудной ситуации',
                       style: TextStyle(
                         color: Colors.black,
@@ -64,14 +65,10 @@ class _HelpPageState extends State<HelpPage> {
                         fontSize: 25,
                       ),
                     ),
-                    Positioned(
-                      bottom: 24,
+                    YellowLineWidget(
+                      width: 96,
                       right: 0,
-                      child: Container(
-                        height: 3,
-                        width: 96,
-                        color: AppColors.primaryOrange,
-                      ),
+                      bottom: 24,
                     ),
                   ],
                 ),

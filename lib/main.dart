@@ -6,6 +6,7 @@ import 'core/themes.dart';
 
 import 'features/auth/bloc/auth/auth_bloc.dart';
 import 'features/auth/bloc/timer/timer_bloc.dart';
+import 'features/dialog/bloc/dialog_bloc.dart';
 import 'features/home/bloc/home_bloc.dart';
 import 'features/menu/bloc/menu_bloc.dart';
 import 'features/mydb/bloc/mydb_bloc.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(create: (context) => TimerBloc()),
         BlocProvider(create: (context) => HomeBloc()),
+        BlocProvider(create: (context) => DialogBloc()),
         BlocProvider(create: (context) => MenuBloc()),
         BlocProvider(create: (context) => MydbBloc()),
         BlocProvider(create: (context) => CheckBloc()),
@@ -51,3 +53,18 @@ class ScrollBehaviorModified extends ScrollBehavior {
     return const BouncingScrollPhysics();
   }
 }
+
+
+// GET
+// http://178.20.41.98/api/v1/blacklist/
+// {'phone_number': '+75555555555'}
+
+
+// POST
+// http://178.20.41.98/api/v1/blacklist/
+// {'phone_number': '+75555555555'}
+
+
+// POST
+// http://178.20.41.98/api/v1/blacklist/
+// {'phone_number': '+75555555555'}

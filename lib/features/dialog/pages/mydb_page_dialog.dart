@@ -2,32 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../features/check/bloc/check_bloc.dart';
-import '../../app_colors.dart';
-import '../../utils.dart';
-import '../buttons/border_button.dart';
-import '../buttons/yellow_button.dart';
-import '../checkbox/checkbox_widget.dart';
-import '../textfields/phone_field.dart';
-import '../textfields/txt_field.dart';
-import 'widgets/error_dialog_widget.dart';
-import 'widgets/loading_dialog_widget.dart';
-import 'widgets/success_dialog_widget.dart';
+import '../../../core/app_colors.dart';
+import '../../../core/utils.dart';
+import '../../../core/widgets/buttons/border_button.dart';
+import '../../../core/widgets/buttons/yellow_button.dart';
+import '../../../core/widgets/checkbox/checkbox_widget.dart';
+import '../../../core/widgets/textfields/phone_field.dart';
+import '../../../core/widgets/textfields/txt_field.dart';
+import '../bloc/dialog_bloc.dart';
+import '../widgets/error_dialog_widget.dart';
+import '../widgets/loading_dialog_widget.dart';
+import '../widgets/success_dialog_widget.dart';
 
-class PhoneAddDialog2 extends StatefulWidget {
-  const PhoneAddDialog2({super.key});
+class MydbPageDialog extends StatefulWidget {
+  const MydbPageDialog({super.key});
 
   @override
-  State<PhoneAddDialog2> createState() => _PhoneAddDialog2State();
+  State<MydbPageDialog> createState() => _MydbPageDialogState();
 }
 
-class _PhoneAddDialog2State extends State<PhoneAddDialog2> {
+class _MydbPageDialogState extends State<MydbPageDialog> {
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
   final scrollController = ScrollController();
 
   void onPhoneFieldChanged() {
-    setState(() {});
+    context.read<DialogBloc>().add(ListenEvent());
   }
 
   void checkboxButton(int index) {
@@ -39,11 +39,10 @@ class _PhoneAddDialog2State extends State<PhoneAddDialog2> {
 
   void cancelButton() {
     context.pop();
-    Utils.clearData();
   }
 
   void addButton() {
-    context.read<CheckBloc>().add(AddToBlacklistEvent(
+    context.read<DialogBloc>().add(AddButtonEvent(
           controller1.text,
           Utils.cid,
           controller2.text,
@@ -64,20 +63,20 @@ class _PhoneAddDialog2State extends State<PhoneAddDialog2> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
-      child: BlocBuilder<CheckBloc, CheckState>(
+      child: BlocBuilder<DialogBloc, DialogState>(
         builder: (context, state) {
-          if (state is CheckLoadingState) {
+          if (state is DialogLoadingState) {
             return const LoadingDialogWidget();
           }
 
-          if (state is ErrorState) {
+          if (state is DialogErrorState) {
             return const Padding(
               padding: EdgeInsets.symmetric(horizontal: 21),
               child: ErrorDialogWidget(),
             );
           }
 
-          if (state is AddedState) {
+          if (state is DialogSuccessState) {
             return const Padding(
               padding: EdgeInsets.symmetric(horizontal: 21),
               child: SuccessDialogWidget(),
@@ -175,12 +174,16 @@ class _PhoneAddDialog2State extends State<PhoneAddDialog2> {
                               ),
                             ),
                             const SizedBox(width: 12),
-                            Expanded(
-                              child: YellowButton(
-                                title: 'Готово',
-                                active: Utils.checkActiveCheckboxes2(),
-                                onPressed: addButton,
-                              ),
+                            BlocBuilder<DialogBloc, DialogState>(
+                              builder: (context, state) {
+                                return Expanded(
+                                  child: YellowButton(
+                                    title: 'Готово',
+                                    active: Utils.checkActiveCheckboxes2(),
+                                    onPressed: addButton,
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),

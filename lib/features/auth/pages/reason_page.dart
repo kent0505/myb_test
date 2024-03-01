@@ -1,3 +1,4 @@
+import 'package:blocker/core/widgets/appbar/yellow_line_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -46,9 +47,9 @@ class _ReasonPageState extends State<ReasonPage> {
           children: [
             const AppLogoWidget(),
             const Spacer(),
-            Stack(
+            const Stack(
               children: [
-                const Text(
+                Text(
                   'Для каких целей\nВы будете использовать приложение?',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -57,14 +58,10 @@ class _ReasonPageState extends State<ReasonPage> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                Positioned(
-                  bottom: 18,
+                YellowLineWidget(
+                  width: 102,
                   right: 10,
-                  child: Container(
-                    height: 3,
-                    width: 102,
-                    color: AppColors.primaryOrange,
-                  ),
+                  bottom: 18,
                 ),
               ],
             ),

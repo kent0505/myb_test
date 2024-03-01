@@ -2,30 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/app_colors.dart';
+import '../../../core/utils.dart';
+import '../../../core/widgets/buttons/border_button.dart';
+import '../../../core/widgets/buttons/yellow_button.dart';
+import '../../../core/widgets/checkbox/checkbox_widget.dart';
+import '../../../core/widgets/textfields/txt_field.dart';
 import '../../../features/check/bloc/check_bloc.dart';
-import '../../app_colors.dart';
-import '../../utils.dart';
-import '../buttons/border_button.dart';
-import '../buttons/yellow_button.dart';
-import '../checkbox/checkbox_widget.dart';
-import '../textfields/txt_field.dart';
-import 'widgets/error_dialog_widget.dart';
-import 'widgets/loading_dialog_widget.dart';
-import 'widgets/success_dialog_widget.dart';
+import '../../../features/dialog/widgets/error_dialog_widget.dart';
+import '../../../features/dialog/widgets/loading_dialog_widget.dart';
+import '../../../features/dialog/widgets/success_dialog_widget.dart';
+import '../bloc/dialog_bloc.dart';
 
-class PhoneAddDialog extends StatefulWidget {
-  const PhoneAddDialog({
+class CheckPageDialog extends StatefulWidget {
+  const CheckPageDialog({
     super.key,
     required this.phone,
+    required this.blocked,
   });
 
   final String phone;
+  final int blocked;
 
   @override
-  State<PhoneAddDialog> createState() => _PhoneAddDialogState();
+  State<CheckPageDialog> createState() => _CheckPageDialogState();
 }
 
-class _PhoneAddDialogState extends State<PhoneAddDialog> {
+class _CheckPageDialogState extends State<CheckPageDialog> {
   final controller = TextEditingController();
   final scrollController = ScrollController();
 
@@ -38,7 +41,6 @@ class _PhoneAddDialogState extends State<PhoneAddDialog> {
 
   void cancelButton() {
     context.pop();
-    Utils.clearData();
   }
 
   void addButton() {
@@ -64,9 +66,9 @@ class _PhoneAddDialogState extends State<PhoneAddDialog> {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 18),
-        child: BlocBuilder<CheckBloc, CheckState>(
+        child: BlocBuilder<DialogBloc, DialogState>(
           builder: (context, state) {
-            if (state is CheckLoadingState) {
+            if (state is DialogLoadingState) {
               return const LoadingDialogWidget();
             }
 
@@ -158,12 +160,16 @@ class _PhoneAddDialogState extends State<PhoneAddDialog> {
                           ),
                         ),
                         const SizedBox(width: 12),
-                        Expanded(
-                          child: YellowButton(
-                            title: 'Готово',
-                            active: Utils.checkActiveCheckboxes(),
-                            onPressed: addButton,
-                          ),
+                        BlocBuilder<DialogBloc, DialogState>(
+                          builder: (context, state) {
+                            return Expanded(
+                              child: YellowButton(
+                                title: 'Готово',
+                                active: Utils.checkActiveCheckboxes(),
+                                onPressed: addButton,
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
