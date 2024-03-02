@@ -23,6 +23,32 @@ class CheckResultPage extends StatefulWidget {
 class _CheckResultPageState extends State<CheckResultPage> {
   final controller = TextEditingController();
 
+  void onPhoneFieldChanged() {
+    context.read<CheckBloc>().add(ListenEvent());
+  }
+
+  void searchButton() {
+    context.read<CheckBloc>().add(CheckButtonEvent(controller.text));
+    controller.clear();
+  }
+
+  void notSpamButton() {
+    context.pop();
+  }
+
+  void spamButton(String phone, int blocked) async {
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return CheckPageDialog(
+          phone: phone,
+          blocked: blocked,
+        );
+      },
+    );
+  }
+
   @override
   void dispose() {
     controller.dispose();
@@ -57,9 +83,7 @@ class _CheckResultPageState extends State<CheckResultPage> {
                     Expanded(
                       child: PhoneField(
                         controller: controller,
-                        onChanged: () {
-                          context.read<CheckBloc>().add(ListenEvent());
-                        },
+                        onChanged: onPhoneFieldChanged,
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -68,12 +92,7 @@ class _CheckResultPageState extends State<CheckResultPage> {
                       child: YellowButton(
                         title: 'Узнать',
                         active: Utils.phoneValid,
-                        onPressed: () {
-                          context
-                              .read<CheckBloc>()
-                              .add(CheckButtonEvent(controller.text));
-                          controller.clear();
-                        },
+                        onPressed: searchButton,
                       ),
                     ),
                   ],
@@ -107,11 +126,7 @@ class _CheckResultPageState extends State<CheckResultPage> {
                             child: BorderButton(
                               title: 'Не спам',
                               active: true,
-                              onPressed: () {
-                                context.pop();
-
-                                ///////////////
-                              },
+                              onPressed: notSpamButton,
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -120,14 +135,10 @@ class _CheckResultPageState extends State<CheckResultPage> {
                               title: 'Спам',
                               icon: 'alert',
                               active: true,
-                              onPressed: () async {
-                                await showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (context) => CheckPageDialog(
-                                    phone: state.phone,
-                                    blocked: state.blocked,
-                                  ),
+                              onPressed: () {
+                                spamButton(
+                                  state.phone,
+                                  state.blocked,
                                 );
                               },
                             ),

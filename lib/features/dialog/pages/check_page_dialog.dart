@@ -37,6 +37,12 @@ class _CheckPageDialogState extends State<CheckPageDialog> {
 
   void cancelButton() {
     context.pop();
+    context.read<DialogBloc>().add(ChangeStateEvent());
+  }
+
+  void onPopInvoked(bool didPop) {
+    print('POP SCOPE');
+    context.read<DialogBloc>().add(ChangeStateEvent());
   }
 
   void addButton() {
@@ -61,125 +67,128 @@ class _CheckPageDialogState extends State<CheckPageDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18),
-        child: BlocBuilder<DialogBloc, DialogState>(
-          builder: (context, state) {
-            if (state is DialogLoadingState) {
-              return const LoadingDialogWidget();
-            }
+    return PopScope(
+      onPopInvoked: onPopInvoked,
+      child: Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18),
+          child: BlocBuilder<DialogBloc, DialogState>(
+            builder: (context, state) {
+              if (state is DialogLoadingState) {
+                return const LoadingDialogWidget();
+              }
 
-            if (state is DialogErrorState) {
-              return const ErrorDialogWidget();
-            }
+              if (state is DialogErrorState) {
+                return const ErrorDialogWidget();
+              }
 
-            if (state is DialogSuccessState) {
-              return const SuccessDialogWidget();
-            }
+              if (state is DialogSuccessState) {
+                return const SuccessDialogWidget();
+              }
 
-            return SingleChildScrollView(
-              reverse: true,
-              child: SizedBox(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(height: 24),
-                    const Text(
-                      'Добавление номера',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.basicGrey4,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      widget.phone,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.primaryText,
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    const Text(
-                      'Пометить как:',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.basicGrey1,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(
-                        maxHeight: 284,
-                        minHeight: 0,
-                      ),
-                      child: RawScrollbar(
-                        controller: scrollController,
-                        thumbColor: AppColors.basicWhite2,
-                        thickness: 5,
-                        radius: const Radius.circular(18),
-                        thumbVisibility: true,
-                        scrollbarOrientation: ScrollbarOrientation.right,
-                        child: ListView.builder(
-                          controller: scrollController,
-                          shrinkWrap: true,
-                          itemCount: Utils.categories.length,
-                          itemBuilder: (context, index) {
-                            return CheckboxWidget(
-                              title: Utils.categories[index].name,
-                              checked: Utils.categories[index].checked,
-                              onTap: () {
-                                checkboxButton(index);
-                              },
-                            );
-                          },
+              return SingleChildScrollView(
+                reverse: true,
+                child: SizedBox(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(height: 24),
+                      const Text(
+                        'Добавление номера',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.basicGrey4,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 15),
-                    TxtField(
-                      controller: controller,
-                      hintText: 'Оставьте комментарий',
-                      onChanged: () {},
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: BorderButton(
-                            title: 'Отменить',
-                            active: true,
-                            onPressed: cancelButton,
+                      const SizedBox(height: 12),
+                      Text(
+                        widget.phone,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.primaryText,
+                        ),
+                      ),
+                      const SizedBox(height: 18),
+                      const Text(
+                        'Пометить как:',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.basicGrey1,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxHeight: 284,
+                          minHeight: 0,
+                        ),
+                        child: RawScrollbar(
+                          controller: scrollController,
+                          thumbColor: AppColors.basicWhite2,
+                          thickness: 5,
+                          radius: const Radius.circular(18),
+                          thumbVisibility: true,
+                          scrollbarOrientation: ScrollbarOrientation.right,
+                          child: ListView.builder(
+                            controller: scrollController,
+                            shrinkWrap: true,
+                            itemCount: Utils.categories.length,
+                            itemBuilder: (context, index) {
+                              return CheckboxWidget(
+                                title: Utils.categories[index].name,
+                                checked: Utils.categories[index].checked,
+                                onTap: () {
+                                  checkboxButton(index);
+                                },
+                              );
+                            },
                           ),
                         ),
-                        const SizedBox(width: 12),
-                        BlocBuilder<DialogBloc, DialogState>(
-                          builder: (context, state) {
-                            return Expanded(
-                              child: YellowButton(
-                                title: 'Готово',
-                                active: Utils.checkActiveCheckboxes(),
-                                onPressed: addButton,
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 24),
-                  ],
+                      ),
+                      const SizedBox(height: 15),
+                      TxtField(
+                        controller: controller,
+                        hintText: 'Оставьте комментарий',
+                        onChanged: () {},
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: BorderButton(
+                              title: 'Отменить',
+                              active: true,
+                              onPressed: cancelButton,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          BlocBuilder<DialogBloc, DialogState>(
+                            builder: (context, state) {
+                              return Expanded(
+                                child: YellowButton(
+                                  title: 'Готово',
+                                  active: Utils.checkActiveCheckboxes(),
+                                  onPressed: addButton,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 24),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
