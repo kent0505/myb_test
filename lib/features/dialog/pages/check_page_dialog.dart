@@ -8,10 +8,9 @@ import '../../../core/widgets/buttons/border_button.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/checkbox/checkbox_widget.dart';
 import '../../../core/widgets/textfields/txt_field.dart';
-import '../../../features/check/bloc/check_bloc.dart';
-import '../../../features/dialog/widgets/error_dialog_widget.dart';
-import '../../../features/dialog/widgets/loading_dialog_widget.dart';
-import '../../../features/dialog/widgets/success_dialog_widget.dart';
+import '../widgets/error_dialog_widget.dart';
+import '../widgets/loading_dialog_widget.dart';
+import '../widgets/success_dialog_widget.dart';
 import '../bloc/dialog_bloc.dart';
 
 class CheckPageDialog extends StatefulWidget {
@@ -33,10 +32,7 @@ class _CheckPageDialogState extends State<CheckPageDialog> {
   final scrollController = ScrollController();
 
   void checkboxButton(int index) {
-    setState(() {
-      Utils.categories[index].checked = !Utils.categories[index].checked;
-    });
-    Utils.getCid();
+    context.read<DialogBloc>().add(CheckboxEvent(index));
   }
 
   void cancelButton() {
@@ -44,11 +40,16 @@ class _CheckPageDialogState extends State<CheckPageDialog> {
   }
 
   void addButton() {
-    context.read<CheckBloc>().add(AddToBlacklistEvent(
+    context.read<DialogBloc>().add(AddButtonEvent(
           widget.phone,
           Utils.cid,
           controller.text,
         ));
+    // if (widget.blocked == 0) {
+
+    // } else {
+    //   print(widget.blocked);
+    // }
   }
 
   @override
@@ -72,11 +73,11 @@ class _CheckPageDialogState extends State<CheckPageDialog> {
               return const LoadingDialogWidget();
             }
 
-            if (state is ErrorState) {
+            if (state is DialogErrorState) {
               return const ErrorDialogWidget();
             }
 
-            if (state is AddedState) {
+            if (state is DialogSuccessState) {
               return const SuccessDialogWidget();
             }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/app_colors.dart';
+import '../../../core/utils.dart';
 
 class ResultCardWidget extends StatelessWidget {
   const ResultCardWidget({
@@ -10,12 +11,14 @@ class ResultCardWidget extends StatelessWidget {
     required this.blocked,
     required this.operator,
     required this.region,
+    required this.categories,
   });
 
   final String phone;
   final int blocked;
   final String operator;
   final String region;
+  final List<int> categories;
 
   @override
   Widget build(BuildContext context) {
@@ -71,51 +74,28 @@ class ResultCardWidget extends StatelessWidget {
           ),
           blocked == 0
               ? Container()
-              : const Padding(
-                  padding: EdgeInsets.only(top: 16),
+              : Padding(
+                  padding: const EdgeInsets.only(top: 16),
                   child: Wrap(
                     spacing: 4,
                     runSpacing: 4,
                     children: [
-                      // for (var category in Utils.categories) ...[
-                      //   if (category.id == )
-                      // ]
-                      // _ResultCategoryWidget(
-                      //   text: 'Коллектор',
-                      //   textColor: AppColors.brandRed,
-                      //   containerColor: Color(0x1af4404c),
-                      //   containerWidth: 70,
-                      // ),
-                      // _ResultCategoryWidget(
-                      //   text: 'Кредитор',
-                      //   textColor: AppColors.brandRed,
-                      //   containerColor: Color(0x1af4404c),
-                      //   containerWidth: 70,
-                      // ),
-                      // _ResultCategoryWidget(
-                      //   text: 'Мошенники  ',
-                      //   textColor: AppColors.brandRed,
-                      //   containerColor: Color(0x1af4404c),
-                      //   containerWidth: 80,
-                      // ),
-                      // _ResultCategoryWidget(
-                      //   text: 'Спам',
-                      //   textColor: AppColors.statusOrange,
-                      //   containerColor: Color(0x2aFB8D0F),
-                      //   containerWidth: 50,
-                      // ),
-                      // _ResultCategoryWidget(
-                      //   text: 'Риелторы',
-                      //   textColor: AppColors.brandSky,
-                      //   containerColor: Color(0x3300B2FF),
-                      //   containerWidth: 70,
-                      // ),
-                      _ResultCategoryWidget(
-                        text: 'Другое',
-                        textColor: AppColors.statusOrange,
-                        containerColor: Color(0x20FB8D0F),
-                        containerWidth: 70,
-                      ),
+                      if (categories.isEmpty) ...[
+                        const _ResultCategoryWidget(
+                          text: 'Другое',
+                          id: 0,
+                        ),
+                      ],
+                      for (var id in categories) ...[
+                        for (var category in Utils.categories) ...[
+                          if (category.id == id) ...[
+                            _ResultCategoryWidget(
+                              text: category.name,
+                              id: category.id,
+                            ),
+                          ]
+                        ]
+                      ],
                     ],
                   ),
                 ),
@@ -164,7 +144,7 @@ class ResultCardWidget extends StatelessWidget {
               : Container(),
           const SizedBox(height: 24),
           _SearchInternetButton(
-            active: true,
+            active: false,
             onPressed: () {
               // context.push('/web', extra: '79005555555');
             },
@@ -175,38 +155,82 @@ class ResultCardWidget extends StatelessWidget {
   }
 }
 
-class _ResultCategoryWidget extends StatelessWidget {
+class _ResultCategoryWidget extends StatefulWidget {
   final String text;
-  final Color textColor;
-  final Color containerColor;
-  final double containerWidth;
+  final int id;
 
   const _ResultCategoryWidget({
     required this.text,
-    required this.textColor,
-    required this.containerColor,
-    required this.containerWidth,
+    required this.id,
   });
 
   @override
+  State<_ResultCategoryWidget> createState() => _ResultCategoryWidgetState();
+}
+
+class _ResultCategoryWidgetState extends State<_ResultCategoryWidget> {
+  Color? color;
+  Color? textColor;
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: containerWidth,
-      height: 40,
-      decoration: BoxDecoration(
-        color: containerColor,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: textColor,
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
+    switch (widget.id) {
+      case 1:
+        color = const Color(0x1af4404c);
+        textColor = AppColors.brandRed;
+        break;
+      case 2:
+        color = const Color(0x2aFB8D0F);
+        textColor = AppColors.statusOrange;
+        break;
+      case 3:
+        color = const Color(0x3300B2FF);
+        textColor = AppColors.brandSky;
+        break;
+      case 4:
+        color = const Color(0x2aFB8D0F);
+        textColor = AppColors.statusOrange;
+        break;
+      case 5:
+        color = const Color(0x1af4404c);
+        textColor = AppColors.brandRed;
+        break;
+      case 6:
+        color = const Color(0x3300B2FF);
+        textColor = AppColors.brandSky;
+        break;
+      case 7:
+        color = const Color(0x1af4404c);
+        textColor = AppColors.brandRed;
+        break;
+      default:
+        color = const Color(0x2aFB8D0F);
+        textColor = textColor = AppColors.statusOrange;
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 6),
+          height: 40,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Center(
+            child: Text(
+              widget.text,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: textColor,
+                fontWeight: FontWeight.w400,
+                fontSize: 12,
+              ),
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

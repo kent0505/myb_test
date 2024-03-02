@@ -13,6 +13,7 @@ class CheckBloc extends Bloc<CheckEvent, CheckState> {
   int? blocked;
   String? operator;
   String? region;
+  List<int>? categories;
 
   CheckBloc() : super(CheckInitial()) {
     on<ListenEvent>((event, emit) {
@@ -22,6 +23,7 @@ class CheckBloc extends Bloc<CheckEvent, CheckState> {
           blocked!,
           operator!,
           region!,
+          categories!,
         ));
       } else {
         emit(CheckInitial());
@@ -35,26 +37,27 @@ class CheckBloc extends Bloc<CheckEvent, CheckState> {
 
       emit(CheckLoadingState());
 
+      String formattedPhone = Utils.formatPhone(event.phone);
+
+      print(formattedPhone);
+
       Result result = await _repository.getPhoneInfo(
-        event.phone
-            .replaceAll('+', '')
-            .replaceAll(' (', '')
-            .replaceAll(') ', '')
-            .replaceAll('-', ''),
+        formattedPhone.replaceAll('+', ''),
       );
+      Result result2 = await _repository.getPhoneFromBlacklist(formattedPhone);
 
-      Utils.phoneValid = false;
-
-      if (result is CheckSuccessResult) {
+      if (result is SuccessResult && result2 is GetResult) {
         blocked = result.blocked;
         operator = result.operator;
         region = result.region;
+        categories = result2.categories;
 
         emit(CheckResultState(
           phone ?? '',
           blocked ?? 0,
           operator ?? '',
           region ?? '',
+          categories ?? [],
         ));
       } else {
         emit(CheckInitial());
@@ -64,21 +67,7 @@ class CheckBloc extends Bloc<CheckEvent, CheckState> {
     on<AddToBlacklistEvent>((event, emit) async {
       emit(CheckLoadingState());
 
-      phone = event.phone
-          .replaceAll(' (', '')
-          .replaceAll(') ', '')
-          .replaceAll('-', '');
-
-      print(phone);
-      print(event.categories);
-      print(event.comment);
-      // await Future.delayed(const Duration(seconds: 2));
-
-      // emit(ErrorState());
-
-      // await Future.delayed(const Duration(seconds: 2));
-
-      // emit(AddedState());
+      phone = Utils.formatPhone(event.phone);
 
       Result result = await _repository.addToBlacklist(
         phone!,

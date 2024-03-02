@@ -97,6 +97,7 @@ class _CheckResultPageState extends State<CheckResultPage> {
                         blocked: state.blocked,
                         operator: state.operator,
                         region: state.region,
+                        categories: state.categories,
                       ),
                       const SizedBox(height: 40),
                       Row(
@@ -108,6 +109,8 @@ class _CheckResultPageState extends State<CheckResultPage> {
                               active: true,
                               onPressed: () {
                                 context.pop();
+
+                                ///////////////
                               },
                             ),
                           ),

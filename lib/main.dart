@@ -63,8 +63,3 @@ class ScrollBehaviorModified extends ScrollBehavior {
 // POST
 // http://178.20.41.98/api/v1/blacklist/
 // {'phone_number': '+75555555555'}
-
-
-// POST
-// http://178.20.41.98/api/v1/blacklist/
-// {'phone_number': '+75555555555'}

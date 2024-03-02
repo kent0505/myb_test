@@ -39,14 +39,14 @@ class Utils {
   //   }
   // }
 
-  static void getCid() {
-    cid = [];
-    for (var category in Utils.categories) {
-      if (category.checked) {
-        cid.add(category.id);
-      }
-    }
-  }
+  // static void getCid() {
+  //   cid = [];
+  //   for (var category in Utils.categories) {
+  //     if (category.checked) {
+  //       cid.add(category.id);
+  //     }
+  //   }
+  // }
 
   static bool checkActiveCheckboxes() {
     for (var category in Utils.categories) {

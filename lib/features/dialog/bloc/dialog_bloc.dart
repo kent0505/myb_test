@@ -24,6 +24,18 @@ class DialogBloc extends Bloc<DialogEvent, DialogState> {
       emit(DialogInitial());
     });
 
+    on<CheckboxEvent>((event, emit) {
+      Utils.categories[event.index].checked =
+          !Utils.categories[event.index].checked;
+      Utils.cid = [];
+      for (var category in Utils.categories) {
+        if (category.checked) {
+          Utils.cid.add(category.id);
+        }
+      }
+      emit(DialogInitial());
+    });
+
     on<AddButtonEvent>((event, emit) async {
       emit(DialogLoadingState());
 

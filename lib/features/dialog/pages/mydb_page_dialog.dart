@@ -9,10 +9,10 @@ import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/checkbox/checkbox_widget.dart';
 import '../../../core/widgets/textfields/phone_field.dart';
 import '../../../core/widgets/textfields/txt_field.dart';
-import '../bloc/dialog_bloc.dart';
 import '../widgets/error_dialog_widget.dart';
 import '../widgets/loading_dialog_widget.dart';
 import '../widgets/success_dialog_widget.dart';
+import '../bloc/dialog_bloc.dart';
 
 class MydbPageDialog extends StatefulWidget {
   const MydbPageDialog({super.key});
@@ -31,10 +31,7 @@ class _MydbPageDialogState extends State<MydbPageDialog> {
   }
 
   void checkboxButton(int index) {
-    setState(() {
-      Utils.categories[index].checked = !Utils.categories[index].checked;
-    });
-    Utils.getCid();
+    context.read<DialogBloc>().add(CheckboxEvent(index));
   }
 
   void cancelButton() {

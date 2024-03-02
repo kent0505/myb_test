@@ -6,6 +6,11 @@ class ListenEvent extends DialogEvent {}
 
 class ChangeStateEvent extends DialogEvent {}
 
+class CheckboxEvent extends DialogEvent {
+  final int index;
+  CheckboxEvent(this.index);
+}
+
 class AddButtonEvent extends DialogEvent {
   final String phone;
   final List<int> categories;
