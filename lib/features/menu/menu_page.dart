@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/app_colors.dart';
+import '../../core/utils.dart';
 import '../../core/widgets/appbar/yellow_line_widget.dart';
 import '../../core/widgets/buttons/border_button.dart';
 import '../../core/widgets/buttons/yellow_button.dart';
@@ -93,19 +94,32 @@ class _MenuPageState extends State<MenuPage> {
                           controller: scrollController,
                           shrinkWrap: true,
                           children: [
-                            const CheckboxWidget(
+                            CheckboxWidget(
                               title: 'Все незнакомые номера',
-                              checked: false,
+                              checked: Utils.allNumbers,
+                              onTap: () {
+                                context.read<MenuBloc>().add(BlockAllNumbers());
+                              },
                             ),
-                            const CheckboxWidget(
+                            CheckboxWidget(
                               title: 'Моя база номеров',
-                              checked: false,
+                              checked: Utils.mydbNumbers,
+                              onTap: () {
+                                context
+                                    .read<MenuBloc>()
+                                    .add(BlockMydbNumbers());
+                              },
                             ),
                             const SizedBox(height: 12),
                             for (var category in state.categories) ...[
                               CheckboxWidget(
                                 title: category.name,
-                                checked: false,
+                                checked: category.checked,
+                                onTap: () {
+                                  context
+                                      .read<MenuBloc>()
+                                      .add(BlockCategory(category.id));
+                                },
                               ),
                             ],
                           ],
@@ -161,7 +175,9 @@ class _InfoButton extends StatelessWidget {
           onTap: () async {
             await showDialog(
               context: context,
-              builder: (context) => const MenuPageDialog(),
+              builder: (context) {
+                return const MenuPageDialog();
+              },
             );
           },
           borderRadius: BorderRadius.circular(50),

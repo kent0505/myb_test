@@ -18,10 +18,43 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
 
       if (result is CategoriesResult) {
         Utils.categories = result.categories;
-        emit(MenuLoadedState(result.categories));
+        emit(MenuLoadedState(Utils.categories));
       } else {
         emit(MenuLoadedState([]));
       }
+    });
+
+    on<BlockAllNumbers>((event, emit) {
+      if (Utils.allNumbers) {
+        Utils.allNumbers = false;
+      } else {
+        Utils.allNumbers = true;
+        Utils.mydbNumbers = false;
+      }
+
+      emit(MenuLoadedState(Utils.categories));
+    });
+
+    on<BlockMydbNumbers>((event, emit) {
+      if (Utils.mydbNumbers) {
+        Utils.mydbNumbers = false;
+      } else {
+        Utils.mydbNumbers = true;
+        Utils.allNumbers = false;
+      }
+
+      emit(MenuLoadedState(Utils.categories));
+    });
+
+    on<BlockCategory>((event, emit) {
+      Utils.categoriesToBlock = Utils.categories;
+
+      for (var category in Utils.categoriesToBlock) {
+        if (category.id == event.id) {
+          category.checked = !category.checked;
+        }
+      }
+      emit(MenuLoadedState(Utils.categories));
     });
   }
 }

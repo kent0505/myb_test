@@ -18,6 +18,10 @@ class Utils {
   static bool warn = false;
   static bool block = false;
 
+  static bool allNumbers = false;
+  static bool mydbNumbers = false;
+  static List<Category> categoriesToBlock = [];
+
   static List<Category> categories = [];
   static List<Phone> blacklist = [];
   static List<int> cid = [];
@@ -25,28 +29,6 @@ class Utils {
   static String formatPhone(String phone) {
     return phone.replaceAll(' (', '').replaceAll(') ', '').replaceAll('-', '');
   }
-
-  // static void clearData() {
-  //   for (var category in Utils.categories) {
-  //     if (category.checked) {
-  //       category.checked = false;
-  //     }
-  //   }
-  //   for (var phone in Utils.blacklist) {
-  //     if (phone.checked) {
-  //       phone.checked = false;
-  //     }
-  //   }
-  // }
-
-  // static void getCid() {
-  //   cid = [];
-  //   for (var category in Utils.categories) {
-  //     if (category.checked) {
-  //       cid.add(category.id);
-  //     }
-  //   }
-  // }
 
   static bool checkActiveCheckboxes() {
     for (var category in Utils.categories) {

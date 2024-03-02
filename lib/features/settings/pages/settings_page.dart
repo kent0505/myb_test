@@ -87,6 +87,7 @@ class SettingsPage extends StatelessWidget {
               onTap: () {
                 // context.push('/terms');
                 context.replace('/auth');
+                Utils.token = '';
                 Utils.saveData('token', '');
                 Utils.saveBool('blockSettings', false);
               },

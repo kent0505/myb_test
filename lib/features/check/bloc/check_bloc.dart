@@ -41,15 +41,15 @@ class CheckBloc extends Bloc<CheckEvent, CheckState> {
 
       print(formattedPhone);
 
-      Result result = await _repository.getPhoneInfo(
+      Result result1 = await _repository.getPhoneInfo(
         formattedPhone.replaceAll('+', ''),
       );
       Result result2 = await _repository.getPhoneFromBlacklist(formattedPhone);
 
-      if (result is SuccessResult && result2 is GetResult) {
-        blocked = result.blocked;
-        operator = result.operator;
-        region = result.region;
+      if (result1 is SuccessResult && result2 is GetResult) {
+        blocked = result1.blocked;
+        operator = result1.operator;
+        region = result1.region;
         categories = result2.categories;
 
         emit(CheckResultState(

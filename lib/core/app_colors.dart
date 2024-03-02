@@ -1,6 +1,6 @@
-import 'package:flutter/painting.dart';
+import 'package:flutter/material.dart';
 
-abstract final class AppColors {
+class AppColors {
   static const Color primaryOrange = Color(0xffFFDA0C);
   static const Color primaryText = Color(0xff0F0F0F);
   static const Color primaryBlack = Color(0xff141414);
@@ -26,4 +26,46 @@ abstract final class AppColors {
   static const Color statusBlue = Color(0xff5790FF);
   static const Color statusGreen = Color(0xff34A853);
   static const Color statusOrange = Color(0xffFB8D0F);
+}
+
+Color getColor(int id) {
+  switch (id) {
+    case 1:
+      return const Color(0x1af4404c);
+    case 2:
+      return const Color(0x2aFB8D0F);
+    case 3:
+      return const Color(0x3300B2FF);
+    case 4:
+      return const Color(0x2aFB8D0F);
+    case 5:
+      return const Color(0x1af4404c);
+    case 6:
+      return const Color(0x3300B2FF);
+    case 7:
+      return const Color(0x1af4404c);
+    default:
+      return const Color(0x2aFB8D0F);
+  }
+}
+
+Color getTextColor(int id) {
+  switch (id) {
+    case 1:
+      return AppColors.brandRed;
+    case 2:
+      return AppColors.statusOrange;
+    case 3:
+      return AppColors.brandSky;
+    case 4:
+      return AppColors.statusOrange;
+    case 5:
+      return AppColors.brandRed;
+    case 6:
+      return AppColors.brandSky;
+    case 7:
+      return AppColors.brandRed;
+    default:
+      return AppColors.statusOrange;
+  }
 }

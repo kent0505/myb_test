@@ -31,6 +31,7 @@ dependencies:
   connectycube_flutter_call_kit: ^2.7.0
   flutter_callkit_incoming: ^2.0.1+2
   webview_flutter: ^4.7.0
+  phone_state: ^1.0.3
 
 dev_dependencies:
   flutter_test:

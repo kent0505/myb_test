@@ -155,7 +155,7 @@ class ResultCardWidget extends StatelessWidget {
   }
 }
 
-class _ResultCategoryWidget extends StatefulWidget {
+class _ResultCategoryWidget extends StatelessWidget {
   final String text;
   final int id;
 
@@ -165,49 +165,7 @@ class _ResultCategoryWidget extends StatefulWidget {
   });
 
   @override
-  State<_ResultCategoryWidget> createState() => _ResultCategoryWidgetState();
-}
-
-class _ResultCategoryWidgetState extends State<_ResultCategoryWidget> {
-  Color? color;
-  Color? textColor;
-
-  @override
   Widget build(BuildContext context) {
-    switch (widget.id) {
-      case 1:
-        color = const Color(0x1af4404c);
-        textColor = AppColors.brandRed;
-        break;
-      case 2:
-        color = const Color(0x2aFB8D0F);
-        textColor = AppColors.statusOrange;
-        break;
-      case 3:
-        color = const Color(0x3300B2FF);
-        textColor = AppColors.brandSky;
-        break;
-      case 4:
-        color = const Color(0x2aFB8D0F);
-        textColor = AppColors.statusOrange;
-        break;
-      case 5:
-        color = const Color(0x1af4404c);
-        textColor = AppColors.brandRed;
-        break;
-      case 6:
-        color = const Color(0x3300B2FF);
-        textColor = AppColors.brandSky;
-        break;
-      case 7:
-        color = const Color(0x1af4404c);
-        textColor = AppColors.brandRed;
-        break;
-      default:
-        color = const Color(0x2aFB8D0F);
-        textColor = textColor = AppColors.statusOrange;
-    }
-
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -215,15 +173,15 @@ class _ResultCategoryWidgetState extends State<_ResultCategoryWidget> {
           padding: const EdgeInsets.symmetric(horizontal: 6),
           height: 40,
           decoration: BoxDecoration(
-            color: color,
+            color: getColor(id),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Center(
             child: Text(
-              widget.text,
+              text,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: textColor,
+                color: getTextColor(id),
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
               ),

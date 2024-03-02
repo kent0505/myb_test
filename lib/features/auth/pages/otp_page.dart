@@ -101,6 +101,7 @@ class _OtpPageState extends State<OtpPage> {
                 listener: (context, state) {
                   if (state is BlockerSettingsState) {
                     context.go('/block_settings');
+                    context.read<TimerBloc>().add(StopTimerEvent());
                   }
 
                   if (state is HomeState) {
