@@ -17,11 +17,11 @@ class CheckPageDialog extends StatefulWidget {
   const CheckPageDialog({
     super.key,
     required this.phone,
-    required this.blocked,
+    required this.add,
   });
 
   final String phone;
-  final int blocked;
+  final bool add;
 
   @override
   State<CheckPageDialog> createState() => _CheckPageDialogState();
@@ -47,15 +47,11 @@ class _CheckPageDialogState extends State<CheckPageDialog> {
 
   void addButton() {
     context.read<DialogBloc>().add(AddButtonEvent(
+          widget.add,
           widget.phone,
           Utils.cid,
           controller.text,
         ));
-    // if (widget.blocked == 0) {
-
-    // } else {
-    //   print(widget.blocked);
-    // }
   }
 
   @override
@@ -86,7 +82,7 @@ class _CheckPageDialogState extends State<CheckPageDialog> {
               }
 
               if (state is DialogSuccessState) {
-                return const SuccessDialogWidget();
+                return SuccessDialogWidget(phone: widget.phone);
               }
 
               return SingleChildScrollView(
@@ -97,9 +93,9 @@ class _CheckPageDialogState extends State<CheckPageDialog> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const SizedBox(height: 24),
-                      const Text(
-                        'Добавление номера',
-                        style: TextStyle(
+                      Text(
+                        widget.add ? 'Добавление номера' : 'Изменение номера',
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                           color: AppColors.basicGrey4,

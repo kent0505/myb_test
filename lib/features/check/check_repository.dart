@@ -5,7 +5,7 @@ import '../../core/network/dio_options.dart';
 import 'models/phone_info.dart';
 
 class CheckRepository {
-  Future<Result> getPhoneInfo(String phone) async {
+  Future<Result> getPhoneOperator(String phone) async {
     try {
       final response = await dio.get(
         '${Const.phoneInfoURL}?phone_number=$phone',
@@ -16,36 +16,24 @@ class CheckRepository {
       print(response.data);
 
       if (response.statusCode == 200) {
-        final data = PhoneOperator.fromJson(response.data);
+        final data = PhoneInfo.fromJson(response.data);
         return SuccessResult(
-          data.blocked,
           data.operator ?? '',
           data.region ?? '',
         );
-      } else if (response.statusCode == 404) {
-        if (response.data['callfilter_info'] != null) {
-          return SuccessResult(
-            response.data['callfilter_info']['blocked'] ?? 0,
-            '',
-            '',
-          );
-        } else {
-          return ErrorResult();
-        }
       } else {
-        return ErrorResult();
+        return SuccessResult('', '');
       }
     } catch (e) {
       print(e);
-      return ErrorResult();
+      return SuccessResult('', '');
     }
   }
 
-  Future<Result> getPhoneFromBlacklist(String phone) async {
+  Future<Result> getPhoneCategories(String phone) async {
     try {
       final response = await dio.get(
-        'http://178.20.41.98/api/v1/blacklist/',
-        data: {'phone_number': phone},
+        'http://178.20.41.98/api/v1/blacklist/public-info/$phone/',
         options: options2,
       );
 
@@ -61,46 +49,14 @@ class CheckRepository {
       return GetResult([]);
     }
   }
-
-  Future<Result> addToBlacklist(
-    String phone,
-    List<int> categories,
-    String comment,
-  ) async {
-    try {
-      final response = await dio.post(
-        Const.addToBlackListURL,
-        data: {
-          'phone_number': phone,
-          'categories': categories,
-          'comment': comment,
-        },
-        options: options,
-      );
-
-      log(response.statusCode.toString());
-      print(response.data);
-
-      if (response.statusCode == 201) {
-        return AddedResult();
-      } else {
-        return ErrorResult();
-      }
-    } catch (e) {
-      print(e);
-      return ErrorResult();
-    }
-  }
 }
 
 abstract class Result {}
 
 class SuccessResult extends Result {
-  final int blocked;
   final String operator;
   final String region;
   SuccessResult(
-    this.blocked,
     this.operator,
     this.region,
   );

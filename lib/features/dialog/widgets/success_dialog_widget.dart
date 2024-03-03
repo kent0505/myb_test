@@ -1,15 +1,21 @@
-import 'package:blocker/features/dialog/bloc/dialog_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../check/bloc/check_bloc.dart';
 import '../../mydb/bloc/mydb_bloc.dart';
 import '../../../core/app_colors.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
+import '../bloc/dialog_bloc.dart';
 
 class SuccessDialogWidget extends StatelessWidget {
-  const SuccessDialogWidget({super.key});
+  const SuccessDialogWidget({
+    super.key,
+    this.phone,
+  });
+
+  final String? phone;
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +64,11 @@ class SuccessDialogWidget extends StatelessWidget {
             active: true,
             onPressed: () {
               context.pop();
+              if (phone != null) {
+                context.read<CheckBloc>().add(CheckButtonEvent(phone!));
+              }
               context.read<DialogBloc>().add(ChangeStateEvent());
               context.read<MydbBloc>().add(GetBlacklistEvent());
-              // deactivateSwitches();
             },
           ),
           const SizedBox(height: 24),

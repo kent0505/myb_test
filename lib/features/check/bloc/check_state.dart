@@ -12,13 +12,11 @@ class ErrorState extends CheckState {}
 
 class CheckResultState extends CheckState {
   final String phone;
-  final int blocked;
   final String operator;
   final String region;
   final List<int> categories;
   CheckResultState(
     this.phone,
-    this.blocked,
     this.operator,
     this.region,
     this.categories,

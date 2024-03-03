@@ -158,11 +158,12 @@ class _MydbPageState extends State<MydbPage> {
                   icon: 'plus-circle',
                   active: true,
                   onPressed: () async {
-                    // open dialog
                     await showDialog(
                       context: context,
                       barrierDismissible: false,
-                      builder: (context) => const MydbPageDialog(),
+                      builder: (context) {
+                        return const MydbPageDialog();
+                      },
                     );
                   },
                 ),

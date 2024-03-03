@@ -1,20 +1,14 @@
-class PhoneOperator {
-  final int phone;
-  final int blocked;
+class PhoneInfo {
   final String? operator;
   final String? region;
 
-  PhoneOperator({
-    required this.phone,
-    required this.blocked,
+  PhoneInfo({
     this.operator,
     this.region,
   });
 
-  factory PhoneOperator.fromJson(Map<String, dynamic> json) {
-    return PhoneOperator(
-      phone: json['callfilter_info']['phone'],
-      blocked: json['callfilter_info']['blocked'],
+  factory PhoneInfo.fromJson(Map<String, dynamic> json) {
+    return PhoneInfo(
       operator: json['operator_info']['operator'],
       region: json['operator_info']['region'],
     );

@@ -8,14 +8,12 @@ class ResultCardWidget extends StatelessWidget {
   const ResultCardWidget({
     super.key,
     required this.phone,
-    required this.blocked,
     required this.operator,
     required this.region,
     required this.categories,
   });
 
   final String phone;
-  final int blocked;
   final String operator;
   final String region;
   final List<int> categories;
@@ -52,7 +50,7 @@ class ResultCardWidget extends StatelessWidget {
           Row(
             children: [
               SvgPicture.asset(
-                blocked == 0
+                categories.isEmpty
                     ? 'assets/icons/tick.svg'
                     : 'assets/icons/search.svg',
                 width: 18,
@@ -60,7 +58,7 @@ class ResultCardWidget extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                blocked == 0
+                categories.isEmpty
                     ? 'Номер не числится в спам-базах'
                     : 'Найденные отметки у номера:',
                 textAlign: TextAlign.center,
@@ -72,7 +70,7 @@ class ResultCardWidget extends StatelessWidget {
               ),
             ],
           ),
-          blocked == 0
+          categories.isEmpty
               ? Container()
               : Padding(
                   padding: const EdgeInsets.only(top: 16),

@@ -3,7 +3,7 @@ import 'dart:developer';
 import '../../core/network/dio_options.dart';
 
 class DialogRepository {
-  Future<Result> addPhone(
+  Future<Result> addBlacklist(
     String phone,
     List<int> categories,
     String comment,
@@ -33,7 +33,37 @@ class DialogRepository {
     }
   }
 
-  Future<Result> deletePhone(List<String> phones) async {
+  Future<Result> updateBlacklist(
+    String phone,
+    List<int> categories,
+    String comment,
+  ) async {
+    try {
+      final response = await dio.patch(
+        'http://178.20.41.98/api/v1/blacklist/',
+        data: {
+          'phone_number': phone,
+          'categories': categories,
+          'comment': comment,
+        },
+        options: options,
+      );
+
+      log(response.statusCode.toString());
+      print(response.data);
+
+      if (response.statusCode == 200) {
+        return SuccessResult();
+      } else {
+        return ErrorResult();
+      }
+    } catch (e) {
+      print(e);
+      return ErrorResult();
+    }
+  }
+
+  Future<Result> deleteBlacklist(List<String> phones) async {
     try {
       final response = await dio.delete(
         'http://178.20.41.98/api/v1/blacklist/',

@@ -46,6 +46,7 @@ class _MydbPageDialogState extends State<MydbPageDialog> {
 
   void addButton() {
     context.read<DialogBloc>().add(AddButtonEvent(
+          true,
           controller1.text,
           Utils.cid,
           controller2.text,

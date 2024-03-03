@@ -36,14 +36,14 @@ class _CheckResultPageState extends State<CheckResultPage> {
     context.pop();
   }
 
-  void spamButton(String phone, int blocked) async {
+  void spamButton(String phone, bool add) async {
     await showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) {
         return CheckPageDialog(
           phone: phone,
-          blocked: blocked,
+          add: add,
         );
       },
     );
@@ -113,7 +113,6 @@ class _CheckResultPageState extends State<CheckResultPage> {
                     children: [
                       ResultCardWidget(
                         phone: state.phone,
-                        blocked: state.blocked,
                         operator: state.operator,
                         region: state.region,
                         categories: state.categories,
@@ -138,7 +137,7 @@ class _CheckResultPageState extends State<CheckResultPage> {
                               onPressed: () {
                                 spamButton(
                                   state.phone,
-                                  state.blocked,
+                                  state.categories.isEmpty,
                                 );
                               },
                             ),

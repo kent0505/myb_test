@@ -12,12 +12,14 @@ class CheckboxEvent extends DialogEvent {
 }
 
 class AddButtonEvent extends DialogEvent {
+  final bool add;
   final String phone;
-  final List<int> categories;
+  final List<int> cid;
   final String comment;
   AddButtonEvent(
+    this.add,
     this.phone,
-    this.categories,
+    this.cid,
     this.comment,
   );
 }

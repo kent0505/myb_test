@@ -41,16 +41,28 @@ class DialogBloc extends Bloc<DialogEvent, DialogState> {
 
       phone = Utils.formatPhone(event.phone);
 
-      Result result = await _repository.addPhone(
-        phone!,
-        event.categories,
-        event.comment,
-      );
-
-      if (result is SuccessResult) {
-        emit(DialogSuccessState());
+      if (event.add) {
+        Result result = await _repository.addBlacklist(
+          phone!,
+          event.cid,
+          event.comment,
+        );
+        if (result is SuccessResult) {
+          emit(DialogSuccessState());
+        } else {
+          emit(DialogErrorState());
+        }
       } else {
-        emit(DialogErrorState());
+        Result result = await _repository.updateBlacklist(
+          phone!,
+          event.cid,
+          event.comment,
+        );
+        if (result is SuccessResult) {
+          emit(DialogSuccessState());
+        } else {
+          emit(DialogErrorState());
+        }
       }
     });
 
@@ -65,7 +77,7 @@ class DialogBloc extends Bloc<DialogEvent, DialogState> {
         }
       }
 
-      Result result = await _repository.deletePhone(phones);
+      Result result = await _repository.deleteBlacklist(phones);
 
       if (result is SuccessResult) {
         emit(DialogSuccessState());
