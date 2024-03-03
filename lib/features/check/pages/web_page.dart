@@ -14,14 +14,15 @@ class WebPage extends StatefulWidget {
 }
 
 class _WebPageState extends State<WebPage> {
-  final _controller = WebViewController()
-    ..loadRequest(Uri.parse('https://www.google.com/search?q=%2B79005555555/'));
+  late final _controller = WebViewController()
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..loadRequest(
+        Uri.parse('https://yandex.ru/search?text=%2B${widget.phone}'));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Web'),
         actions: [
           IconButton(
             icon: const Icon(Icons.arrow_back_ios),
@@ -47,7 +48,10 @@ class _WebPageState extends State<WebPage> {
           ),
         ],
       ),
-      body: WebViewWidget(controller: _controller),
+      body: Padding(
+        padding: const EdgeInsets.all(0),
+        child: WebViewWidget(controller: _controller),
+      ),
     );
   }
 }

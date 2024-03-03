@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
+import '../../../core/widgets/text/text_widget.dart';
 import '../../../core/widgets/textfields/phone_field.dart';
 import '../bloc/auth/auth_bloc.dart';
 import '../widgets/app_logo_widget.dart';
@@ -38,13 +39,11 @@ class _PhonePageState extends State<PhonePage> {
             children: [
               const AppLogoWidget(),
               const Spacer(),
-              const Text(
+              const TextWidget(
                 'Введите номер телефона, чтобы войти',
-                style: TextStyle(
-                  color: AppColors.basicGrey5,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ),
+                size: 12,
+                weight: 400,
+                color: AppColors.basicGrey5,
               ),
               const SizedBox(height: 8),
               BlocBuilder<AuthBloc, AuthState>(

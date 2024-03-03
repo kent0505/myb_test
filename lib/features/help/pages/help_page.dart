@@ -35,7 +35,6 @@ class _HelpPageState extends State<HelpPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('BUILD HELP PAGE');
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(

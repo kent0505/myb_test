@@ -6,6 +6,7 @@ import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/appbar/app_bar_widget.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/loading/loading_widget.dart';
+import '../../../core/widgets/text/text_widget.dart';
 import '../bloc/help_bloc.dart';
 
 class HelpStatusPage extends StatelessWidget {
@@ -27,13 +28,11 @@ class HelpStatusPage extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  const TextWidget(
                     'Произошла ошибка, повторите чуть позже',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 25,
-                    ),
+                    size: 25,
+                    weight: 700,
+                    color: AppColors.primaryText,
                   ),
                   const SizedBox(height: 40),
                   YellowButton(
@@ -51,32 +50,25 @@ class HelpStatusPage extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  const TextWidget(
                     'Благодарим за доверие!',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 25,
-                    ),
+                    size: 25,
+                    weight: 700,
+                    color: Colors.black,
                   ),
                   const SizedBox(height: 30),
-                  const Text(
+                  const TextWidget(
                     'В ближайшее время с вами свяжется юрист для уточнения деталей Вашей ситуации.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
+                    size: 14,
+                    weight: 400,
+                    color: Colors.black,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  const TextWidget(
                     'Пожалуйста, ответьте на входящий звонок.',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.basicGrey1,
-                    ),
+                    size: 14,
+                    weight: 400,
+                    color: AppColors.basicGrey1,
                   ),
                   const SizedBox(height: 40),
                   YellowButton(

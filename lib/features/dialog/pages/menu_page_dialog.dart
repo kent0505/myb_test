@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
+import '../../../core/widgets/text/text_widget.dart';
 
 class MenuPageDialog extends StatelessWidget {
   const MenuPageDialog({super.key});
@@ -21,13 +22,11 @@ class MenuPageDialog extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Spacer(),
-              const Text(
+              const TextWidget(
                 'Обновляет базу',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.primaryText,
-                ),
+                size: 24,
+                weight: 500,
+                color: AppColors.primaryText,
               ),
               const Spacer(),
               YellowButton(

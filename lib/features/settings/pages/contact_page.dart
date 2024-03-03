@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
 import '../../../core/widgets/appbar/app_bar_widget.dart';
+import '../../../core/widgets/text/text_widget.dart';
 import '../../../core/widgets/text/yellow_line_widget.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/textfields/email_field.dart';
@@ -43,13 +44,11 @@ class _ContactPageState extends State<ContactPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            const Text(
+            const TextWidget(
               'Связаться с нами',
-              style: TextStyle(
-                color: AppColors.basicGrey5,
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
-              ),
+              size: 20,
+              weight: 500,
+              color: AppColors.basicGrey5,
             ),
             const SizedBox(height: 30),
             const YellowLineTextWidget(
@@ -60,22 +59,18 @@ class _ContactPageState extends State<ContactPage> {
               left: 125,
             ),
             const SizedBox(height: 30),
-            const Text(
+            const TextWidget(
               'Если у Вас возникли вопросы, связанные с работой приложения, или Вы хотите написать отзыв, это можно сделать, заполнив форму ниже.',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: AppColors.primaryBlack,
-              ),
+              size: 14,
+              weight: 400,
+              color: AppColors.primaryBlack,
             ),
             const SizedBox(height: 30),
-            const Text(
+            const TextWidget(
               'Как с Вами связаться?',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: AppColors.basicGrey4,
-              ),
+              size: 14,
+              weight: 400,
+              color: AppColors.basicGrey4,
             ),
             const SizedBox(height: 16),
             NameField(

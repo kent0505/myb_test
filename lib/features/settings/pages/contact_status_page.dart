@@ -1,4 +1,3 @@
-import 'package:blocker/core/widgets/loading/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/appbar/app_bar_widget.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
+import '../../../core/widgets/loading/loading_widget.dart';
+import '../../../core/widgets/text/text_widget.dart';
 import '../bloc/settings_bloc.dart';
 
 class ContactStatusPage extends StatelessWidget {
@@ -27,13 +28,11 @@ class ContactStatusPage extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  const TextWidget(
                     'Произошла ошибка, повторите чуть позже',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 25,
-                    ),
+                    size: 25,
+                    weight: 700,
+                    color: Colors.black,
                   ),
                   const SizedBox(height: 40),
                   YellowButton(
@@ -51,33 +50,26 @@ class ContactStatusPage extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  const TextWidget(
                     'Благодарим за обращение!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black,
-                    ),
+                    size: 25,
+                    weight: 700,
+                    color: Colors.black,
                   ),
                   const SizedBox(height: 30),
-                  const Text(
+                  const TextWidget(
                     'Мы ценим каждое обращение. Вы помогаете нам стать лучше и эффективнее.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.primaryBlack,
-                    ),
+                    size: 14,
+                    weight: 400,
+                    center: true,
+                    color: AppColors.primaryBlack,
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  const TextWidget(
                     'Спасибо!',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.basicGrey1,
-                    ),
+                    size: 14,
+                    weight: 400,
+                    color: AppColors.basicGrey1,
                   ),
                   const SizedBox(height: 40),
                   YellowButton(

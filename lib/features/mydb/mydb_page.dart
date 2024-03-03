@@ -7,6 +7,7 @@ import '../../core/widgets/buttons/border_button.dart';
 import '../../core/widgets/buttons/yellow_button.dart';
 import '../../core/widgets/checkbox/checkbox_widget.dart';
 import '../../core/widgets/loading/loading_widget.dart';
+import '../../core/widgets/text/text_widget.dart';
 import '../dialog/pages/mydb_page_dialog.dart';
 import 'bloc/mydb_bloc.dart';
 
@@ -34,18 +35,15 @@ class _MydbPageState extends State<MydbPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 30),
-          const Text(
+          const TextWidget(
             'Моя база номеров',
-            style: TextStyle(
-              color: AppColors.basicGrey5,
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
+            size: 20,
+            weight: 500,
+            color: AppColors.basicGrey5,
           ),
           const SizedBox(height: 30),
           Container(
             height: 390,
-            // padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: Colors.white,
@@ -71,13 +69,11 @@ class _MydbPageState extends State<MydbPage> {
                       const SizedBox(height: 28),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(
+                        child: TextWidget(
                           'Данные номера находятся в\nЧерном Списке',
-                          style: TextStyle(
-                            color: AppColors.primaryBlack,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          size: 16,
+                          weight: 500,
+                          color: AppColors.primaryBlack,
                         ),
                       ),
                       const SizedBox(height: 15),

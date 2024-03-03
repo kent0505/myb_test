@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
+import '../../../core/widgets/text/text_widget.dart';
 import '../bloc/dialog_bloc.dart';
 
 class ErrorDialogWidget extends StatelessWidget {
@@ -17,13 +18,11 @@ class ErrorDialogWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Spacer(),
-          const Text(
+          const TextWidget(
             'Произошла ошибка!',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w500,
-              color: AppColors.primaryText,
-            ),
+            size: 24,
+            weight: 500,
+            color: AppColors.primaryText,
           ),
           const Spacer(),
           YellowButton(

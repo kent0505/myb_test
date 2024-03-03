@@ -7,6 +7,7 @@ import '../../../core/utils.dart';
 import '../../../core/widgets/buttons/border_button.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/checkbox/checkbox_widget.dart';
+import '../../../core/widgets/text/text_widget.dart';
 import '../../../core/widgets/textfields/phone_field.dart';
 import '../../../core/widgets/textfields/txt_field.dart';
 import '../widgets/error_dialog_widget.dart';
@@ -98,13 +99,11 @@ class _MydbPageDialogState extends State<MydbPageDialog> {
                     const SizedBox(height: 24),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 21),
-                      child: Text(
+                      child: TextWidget(
                         'Добавление номера',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.basicGrey4,
-                        ),
+                        size: 16,
+                        weight: 500,
+                        color: AppColors.basicGrey4,
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -126,13 +125,11 @@ class _MydbPageDialogState extends State<MydbPageDialog> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          const TextWidget(
                             'Пометить как:',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.basicGrey1,
-                            ),
+                            size: 12,
+                            weight: 400,
+                            color: AppColors.basicGrey1,
                           ),
                           const SizedBox(height: 5),
                           ConstrainedBox(

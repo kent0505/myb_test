@@ -8,6 +8,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/buttons/txt_button.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
+import '../../../core/widgets/text/text_widget.dart';
 import '../bloc/auth/auth_bloc.dart';
 import '../bloc/timer/timer_bloc.dart';
 import '../widgets/app_logo_widget.dart';
@@ -40,7 +41,6 @@ class _OtpPageState extends State<OtpPage> {
   Widget build(BuildContext context) {
     return PopScope(
       onPopInvoked: (_) {
-        print('POP SCOPE FROM OTP PAGE');
         context.read<TimerBloc>().add(StopTimerEvent());
       },
       child: Scaffold(
@@ -52,13 +52,11 @@ class _OtpPageState extends State<OtpPage> {
             children: [
               const AppLogoWidget(),
               const Spacer(),
-              const Text(
+              const TextWidget(
                 'Введите код, отправленный на Ваш номер  телефона',
-                style: TextStyle(
-                  color: AppColors.basicGrey5,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ),
+                size: 12,
+                weight: 400,
+                color: AppColors.basicGrey5,
               ),
               const SizedBox(height: 22),
               PinCodeTextField(

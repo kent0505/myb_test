@@ -6,18 +6,21 @@ class TextWidget extends StatelessWidget {
     super.key,
     required this.size,
     required this.weight,
+    this.center = false,
     required this.color,
   });
 
   final String title;
   final double size;
   final int weight;
+  final bool center;
   final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
+      textAlign: center ? TextAlign.center : TextAlign.left,
       style: TextStyle(
         fontSize: size,
         fontWeight: getWeight(weight),

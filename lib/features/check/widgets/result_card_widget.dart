@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
@@ -128,10 +129,10 @@ class ResultCardWidget extends StatelessWidget {
           const SizedBox(height: 24),
           BorderButton(
             title: 'Искать в интернете',
-            active: false,
+            active: true,
             icon: 'global_search',
             onPressed: () {
-              // context.push('/web', extra: '79005555555');
+              context.push('/web', extra: Utils.formatPhone(phone));
             },
           ),
         ],

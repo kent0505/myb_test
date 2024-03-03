@@ -7,6 +7,7 @@ import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
 import '../../../core/widgets/buttons/border_button.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
+import '../../../core/widgets/text/text_widget.dart';
 
 class BlockerSettingsPage extends StatefulWidget {
   const BlockerSettingsPage({super.key});
@@ -31,24 +32,20 @@ class _BlockerSettingsPageState extends State<BlockerSettingsPage> {
                 children: [
                   SvgPicture.asset('assets/icons/setting_2.svg'),
                   const SizedBox(width: 8),
-                  const Text(
+                  const TextWidget(
                     'Настройки блокиратора',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.primaryBlack,
-                    ),
+                    size: 24,
+                    weight: 700,
+                    color: AppColors.primaryBlack,
                   ),
                 ],
               ),
               const SizedBox(height: 18),
-              const Text(
+              const TextWidget(
                 'Для работы приложения предоставьте доступ к блокировке вызовов',
-                style: TextStyle(
-                  color: AppColors.basicGrey4,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
+                size: 16,
+                weight: 400,
+                color: AppColors.basicGrey4,
               ),
               const SizedBox(height: 60),
               const _StepsWidget(
@@ -94,10 +91,9 @@ class _BlockerSettingsPageState extends State<BlockerSettingsPage> {
               YellowButton(
                 title: 'Готово',
                 active: active,
-                onPressed: () async {
-                  await Utils.saveBool('blockSettings', true).then((_) {
-                    context.go('/home');
-                  });
+                onPressed: () {
+                  Utils.saveBool('blockSettings', true);
+                  context.go('/home');
                 },
               ),
               const SizedBox(height: 76),
@@ -137,13 +133,11 @@ class _StepsWidget extends StatelessWidget {
             ),
           ),
           child: Center(
-            child: Text(
+            child: TextWidget(
               index.toString(),
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: AppColors.primaryBlack,
-              ),
+              size: 16,
+              weight: 400,
+              color: AppColors.primaryBlack,
             ),
           ),
         ),

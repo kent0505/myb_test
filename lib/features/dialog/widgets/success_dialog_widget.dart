@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/widgets/text/text_widget.dart';
 import '../../check/bloc/check_bloc.dart';
 import '../../mydb/bloc/mydb_bloc.dart';
 import '../../../core/config/app_colors.dart';
@@ -31,32 +32,25 @@ class SuccessDialogWidget extends StatelessWidget {
             width: 65,
           ),
           const SizedBox(height: 18),
-          const Text(
+          const TextWidget(
             'Номер добавлен в спам!',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w500,
-              color: AppColors.primaryText,
-            ),
+            size: 24,
+            weight: 500,
+            color: AppColors.primaryText,
           ),
           const SizedBox(height: 18),
-          const Text(
+          const TextWidget(
             'Спасибо, что пополняете базу\nнежелательных номеров.',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: AppColors.primaryBlack,
-            ),
+            size: 14,
+            weight: 500,
+            color: AppColors.primaryBlack,
           ),
           const SizedBox(height: 18),
-          const Text(
+          const TextWidget(
             'Это поможет другим пользователям.',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: AppColors.basicGrey1,
-            ),
+            size: 12,
+            weight: 400,
+            color: AppColors.basicGrey1,
           ),
           const SizedBox(height: 40),
           YellowButton(
