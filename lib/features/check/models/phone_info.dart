@@ -14,28 +14,3 @@ class PhoneInfo {
     );
   }
 }
-
-// class PhoneInfo {
- 
-//   final List<int> categories;
- 
-
-//   PhoneInfo({
-//     required this.phoneNumber,
-//     this.operator,
-//     this.region,
-//     required this.categories,
-//     required this.comment,
-//     required this.warnOnly,
-//   });
-
-//   // Factory method to parse JSON into PhoneInfo model
-//   factory PhoneInfo.fromJson(Map<String, dynamic> json) {
-//     return PhoneInfo(
- 
- 
-//       categories: List<int>.from(json['categories']),
- 
-//     );
-//   }
-// }

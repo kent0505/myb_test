@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../../core/app_colors.dart';
+import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
 import '../../../core/widgets/buttons/border_button.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';

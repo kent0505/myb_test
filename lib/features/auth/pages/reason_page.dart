@@ -1,11 +1,10 @@
-import 'package:blocker/core/widgets/appbar/yellow_line_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/app_colors.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/checkbox/checkbox_widget.dart';
+import '../../../core/widgets/text/yellow_line_widget.dart';
 import '../bloc/auth/auth_bloc.dart';
 import '../widgets/app_logo_widget.dart';
 import '../widgets/policy_buttons_widget.dart';
@@ -47,23 +46,12 @@ class _ReasonPageState extends State<ReasonPage> {
           children: [
             const AppLogoWidget(),
             const Spacer(),
-            const Stack(
-              children: [
-                Text(
-                  'Для каких целей\nВы будете использовать приложение?',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.primaryBlack,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                YellowLineWidget(
-                  width: 102,
-                  right: 10,
-                  bottom: 18,
-                ),
-              ],
+            const YellowLineTextWidget(
+              'Для каких целей\nВы будете использовать приложение?',
+              size: 20,
+              width: 102,
+              right: 10,
+              bottom: 18,
             ),
             const SizedBox(height: 55),
             Padding(
@@ -71,15 +59,14 @@ class _ReasonPageState extends State<ReasonPage> {
               child: Column(
                 children: [
                   CheckboxWidget(
-                    title: 'Защищаюсь от коллекторов/банков',
+                    'Защищаюсь от коллекторов/банков',
                     checked: checked1,
                     onTap: () {
                       change(true);
                     },
                   ),
                   CheckboxWidget(
-                    title:
-                        'Я занятой человек, не хочу получать нежелательные звонки',
+                    'Я занятой человек, не хочу получать нежелательные звонки',
                     checked: checked2,
                     onTap: () {
                       change(false);

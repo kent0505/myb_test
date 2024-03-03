@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/router.dart';
-import 'core/themes.dart';
+import 'core/config/router.dart';
+import 'core/config/themes.dart';
 
 import 'features/auth/bloc/auth/auth_bloc.dart';
 import 'features/auth/bloc/timer/timer_bloc.dart';

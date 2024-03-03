@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/app_colors.dart';
+import '../../core/config/app_colors.dart';
 import '../../core/utils.dart';
-import '../../core/widgets/appbar/yellow_line_widget.dart';
+import '../../core/widgets/text/yellow_line_widget.dart';
 import '../../core/widgets/buttons/border_button.dart';
 import '../../core/widgets/buttons/yellow_button.dart';
 import '../../core/widgets/checkbox/checkbox_widget.dart';
@@ -36,22 +36,12 @@ class _MenuPageState extends State<MenuPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 30),
-          const Stack(
-            children: [
-              Text(
-                'Какие звонки \nВы хотите блокировать?',
-                style: TextStyle(
-                  color: AppColors.basicBlack3,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              YellowLineWidget(
-                width: 58,
-                top: 2,
-                left: 56,
-              ),
-            ],
+          const YellowLineTextWidget(
+            'Какие звонки \nВы хотите блокировать?',
+            size: 20,
+            width: 58,
+            top: 2,
+            left: 56,
           ),
           const SizedBox(height: 24),
           Container(
@@ -95,14 +85,14 @@ class _MenuPageState extends State<MenuPage> {
                           shrinkWrap: true,
                           children: [
                             CheckboxWidget(
-                              title: 'Все незнакомые номера',
+                              'Все незнакомые номера',
                               checked: Utils.allNumbers,
                               onTap: () {
                                 context.read<MenuBloc>().add(BlockAllNumbers());
                               },
                             ),
                             CheckboxWidget(
-                              title: 'Моя база номеров',
+                              'Моя база номеров',
                               checked: Utils.mydbNumbers,
                               onTap: () {
                                 context
@@ -113,7 +103,7 @@ class _MenuPageState extends State<MenuPage> {
                             const SizedBox(height: 12),
                             for (var category in state.categories) ...[
                               CheckboxWidget(
-                                title: category.name,
+                                category.name,
                                 checked: category.checked,
                                 onTap: () {
                                   context

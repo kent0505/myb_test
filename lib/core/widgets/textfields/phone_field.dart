@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import '../../app_colors.dart';
+import '../../config/app_colors.dart';
 import '../../utils.dart';
 import 'widgets/check_icon.dart';
 import 'widgets/label_text.dart';
@@ -63,6 +63,7 @@ class PhoneFieldState extends State<PhoneField> {
           label: widget.shadow
               ? const LabelText(label: 'Введите номер телефона')
               : const LabelText(label: 'Введите номер телефона', star: true),
+
           floatingLabelBehavior: FloatingLabelBehavior.never,
           prefixText: prefix ? '+7' : null,
           prefixStyle: const TextStyle(

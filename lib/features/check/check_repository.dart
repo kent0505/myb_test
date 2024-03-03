@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import '../../core/constants.dart';
 import '../../core/network/dio_options.dart';
 import 'models/phone_info.dart';
 
@@ -8,7 +7,7 @@ class CheckRepository {
   Future<Result> getPhoneOperator(String phone) async {
     try {
       final response = await dio.get(
-        '${Const.phoneInfoURL}?phone_number=$phone',
+        'http://178.20.41.98/api/v1/callfilter_api/check-phone/?phone_number=$phone',
         options: options2,
       );
 

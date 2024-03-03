@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/app_colors.dart';
+import '../../core/config/app_colors.dart';
 import '../../core/utils.dart';
 import '../../core/widgets/buttons/border_button.dart';
 import '../../core/widgets/buttons/yellow_button.dart';
@@ -111,7 +111,7 @@ class _MydbPageState extends State<MydbPage> {
                                 itemCount: state.blacklist.length,
                                 itemBuilder: (context, index) {
                                   return CheckboxWidget(
-                                    title: state.blacklist[index].phone,
+                                    state.blacklist[index].phone,
                                     checked: state.blacklist[index].checked,
                                     onTap: () {
                                       context

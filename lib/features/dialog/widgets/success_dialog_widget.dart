@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../check/bloc/check_bloc.dart';
 import '../../mydb/bloc/mydb_bloc.dart';
-import '../../../core/app_colors.dart';
+import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../bloc/dialog_bloc.dart';
 

@@ -19,10 +19,7 @@ class HelpBloc extends Bloc<HelpEvent, HelpState> {
 
       await Future.delayed(const Duration(seconds: 1));
 
-      String phone = event.phone
-          .replaceAll(' (', '')
-          .replaceAll(') ', '')
-          .replaceAll('-', '');
+      String phone = Utils.formatPhone(event.phone);
 
       bool result = await _repository.help(
         event.name,

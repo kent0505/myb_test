@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/app_colors.dart';
+import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/appbar/app_bar_widget.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../bloc/settings_bloc.dart';

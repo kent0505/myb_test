@@ -1,11 +1,12 @@
+import 'package:blocker/core/config/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/app_colors.dart';
 import '../../../core/utils.dart';
-import '../../../core/widgets/appbar/yellow_line_widget.dart';
+import '../../../core/widgets/text/text_widget.dart';
+import '../../../core/widgets/text/yellow_line_widget.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/textfields/email_field.dart';
 import '../../../core/widgets/textfields/name_field.dart';
@@ -43,34 +44,22 @@ class _HelpPageState extends State<HelpPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            const Text(
+            const TextWidget(
               'Помощь',
-              style: TextStyle(
-                color: AppColors.basicGrey5,
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
-              ),
+              size: 20,
+              weight: 500,
+              color: AppColors.basicGrey5,
             ),
             const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Stack(
-                  children: [
-                    Text(
-                      'Поможем выйти \nиз трудной ситуации',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 25,
-                      ),
-                    ),
-                    YellowLineWidget(
-                      width: 96,
-                      right: 0,
-                      bottom: 24,
-                    ),
-                  ],
+                const YellowLineTextWidget(
+                  'Поможем выйти \nиз трудной ситуации',
+                  size: 25,
+                  width: 96,
+                  right: 0,
+                  bottom: 24,
                 ),
                 SvgPicture.asset(
                   'assets/images/heart.svg',
@@ -80,22 +69,18 @@ class _HelpPageState extends State<HelpPage> {
               ],
             ),
             const SizedBox(height: 30),
-            const Text(
+            const TextWidget(
               'Предоставим бесплатную консультацию по борьбе с долгами, общению с кредиторами и всем возможным способам избавления от кредитов.',
-              style: TextStyle(
-                color: AppColors.basicGrey1,
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-              ),
+              size: 14,
+              weight: 400,
+              color: AppColors.basicGrey1,
             ),
             const SizedBox(height: 40),
-            const Text(
+            const TextWidget(
               'Как с Вами связаться?',
-              style: TextStyle(
-                color: AppColors.basicGrey4,
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-              ),
+              size: 14,
+              weight: 400,
+              color: AppColors.basicGrey4,
             ),
             const SizedBox(height: 16),
             NameField(

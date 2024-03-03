@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/app_colors.dart';
+import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
+import '../../../core/widgets/buttons/additional_button.dart';
+import '../../../core/widgets/checkbox/switch_widget.dart';
+import '../../../core/widgets/text/text_widget.dart';
 import '../bloc/settings_bloc.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -19,22 +21,18 @@ class SettingsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            const Text(
+            const TextWidget(
               'Настройки',
-              style: TextStyle(
-                color: AppColors.basicGrey5,
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
-              ),
+              size: 20,
+              weight: 500,
+              color: AppColors.basicGrey5,
             ),
             const SizedBox(height: 40),
-            const Text(
+            const TextWidget(
               'Нежелательные звонки',
-              style: TextStyle(
-                color: AppColors.basicGrey4,
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-              ),
+              size: 12,
+              weight: 400,
+              color: AppColors.basicGrey4,
             ),
             const SizedBox(height: 12),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -64,16 +62,14 @@ class SettingsPage extends StatelessWidget {
               },
             ),
             const SizedBox(height: 40),
-            const Text(
+            const TextWidget(
               'Дополнительно',
-              style: TextStyle(
-                color: AppColors.basicGrey4,
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-              ),
+              size: 12,
+              weight: 400,
+              color: AppColors.basicGrey4,
             ),
             const SizedBox(height: 12),
-            _AdditionalButton(
+            AdditionalButton(
               title: 'Политика конфиденциальности',
               asset: 'document',
               onTap: () {
@@ -81,19 +77,15 @@ class SettingsPage extends StatelessWidget {
               },
             ),
             const SizedBox(height: 12),
-            _AdditionalButton(
+            AdditionalButton(
               title: 'Условия использования',
               asset: 'clipboard_tick',
               onTap: () {
-                // context.push('/terms');
-                context.replace('/auth');
-                Utils.token = '';
-                Utils.saveData('token', '');
-                Utils.saveBool('blockSettings', false);
+                context.push('/terms');
               },
             ),
             const SizedBox(height: 12),
-            _AdditionalButton(
+            AdditionalButton(
               title: 'Связаться с нами',
               asset: 'support',
               blue: true,
@@ -101,7 +93,17 @@ class SettingsPage extends StatelessWidget {
                 context.push('/contact');
               },
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 12),
+            AdditionalButton(
+              title: 'Выход',
+              asset: '',
+              onTap: () {
+                context.replace('/auth');
+                Utils.token = '';
+                Utils.saveData('token', '');
+                Utils.saveBool('blockSettings', false);
+              },
+            ),
           ],
         ),
       ),
@@ -130,125 +132,26 @@ class _SwitchTile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              TextWidget(
                 title,
-                style: const TextStyle(
-                  color: AppColors.primaryText,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                ),
+                size: 14,
+                weight: 500,
+                color: AppColors.primaryText,
               ),
               const SizedBox(height: 6),
-              Text(
+              TextWidget(
                 subtitle,
-                style: const TextStyle(
-                  color: AppColors.basicGrey1,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                ),
-              )
+                size: 12,
+                weight: 400,
+                color: AppColors.basicGrey1,
+              ),
             ],
           ),
         ),
         const SizedBox(width: 50),
-        _SwitchWidget(
+        SwitchWidget(
           active: active,
           onTap: onTap,
-        ),
-      ],
-    );
-  }
-}
-
-class _SwitchWidget extends StatelessWidget {
-  const _SwitchWidget({
-    required this.onTap,
-    required this.active,
-  });
-
-  final void Function() onTap;
-  final bool active;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Stack(
-        children: [
-          AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            height: 24,
-            width: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40),
-              color: active ? AppColors.primaryOrange : AppColors.basicWhite1,
-            ),
-          ),
-          AnimatedPositioned(
-            duration: const Duration(milliseconds: 300),
-            right: active ? 3 : 19,
-            left: active ? 19 : 3,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 3,
-              ),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                height: 18,
-                width: 18,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: active ? Colors.white : AppColors.basicGrey5,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _AdditionalButton extends StatelessWidget {
-  const _AdditionalButton({
-    required this.title,
-    required this.asset,
-    this.blue = false,
-    required this.onTap,
-  });
-
-  final String title;
-  final String asset;
-  final bool blue;
-  final void Function() onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        SvgPicture.asset('assets/icons/$asset.svg', height: 18),
-        const SizedBox(width: 8),
-        GestureDetector(
-          onTap: onTap,
-          child: Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              shadows: [
-                Shadow(
-                  color: blue ? AppColors.brandSky : AppColors.primaryBlack,
-                  offset: const Offset(0, -1.5),
-                )
-              ],
-              color: Colors.transparent,
-              decoration: TextDecoration.underline,
-              decorationColor:
-                  blue ? AppColors.brandSky : AppColors.primaryBlack,
-              decorationThickness: 1.5,
-            ),
-          ),
         ),
       ],
     );

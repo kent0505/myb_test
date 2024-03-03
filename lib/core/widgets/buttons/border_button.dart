@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../app_colors.dart';
+import '../../config/app_colors.dart';
 
 class BorderButton extends StatelessWidget {
   const BorderButton({
     super.key,
     required this.title,
     required this.active,
-    required this.onPressed,
+    this.icon = '',
+    this.onPressed,
   });
 
   final String title;
   final bool active;
-  final Function() onPressed;
+  final String icon;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +39,23 @@ class BorderButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              icon.isNotEmpty
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: SvgPicture.asset(
+                        'assets/icons/$icon.svg',
+                        width: 18,
+                        height: 18,
+                      ),
+                    )
+                  : Container(),
               Text(
                 title,
                 style: TextStyle(
                   fontSize: 13,
-                  color: active ? AppColors.primaryBlack : AppColors.basicGrey4,
+                  color: active || icon.isNotEmpty
+                      ? AppColors.primaryBlack
+                      : AppColors.basicGrey4,
                   fontWeight: FontWeight.w500,
                 ),
               ),

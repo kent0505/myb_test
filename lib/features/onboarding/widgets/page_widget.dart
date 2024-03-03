@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../core/app_colors.dart';
+import '../../../core/config/app_colors.dart';
 import '../models/page_model.dart';
 
 class PageWidget extends StatelessWidget {

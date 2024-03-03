@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../../core/app_colors.dart';
+import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/buttons/txt_button.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../bloc/auth/auth_bloc.dart';

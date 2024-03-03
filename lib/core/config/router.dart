@@ -1,21 +1,21 @@
 import 'package:go_router/go_router.dart';
 
-import '../features/auth/pages/otp_page.dart';
-import '../features/auth/pages/phone_page.dart';
-import '../features/auth/pages/reason_page.dart';
-import '../features/check/pages/check_result_page.dart';
-import '../features/check/pages/web_page.dart';
-import '../features/help/pages/help_status_page.dart';
-import '../features/settings/pages/contact_page.dart';
-import '../features/settings/pages/contact_status_page.dart';
-import '../features/splash/splash_page.dart';
-import '../features/auth/pages/auth_page.dart';
-import '../features/home/home_page.dart';
-import '../features/onboarding/pages/onboarding_page.dart';
-import '../features/onboarding/pages/blocker_settings_page.dart';
-import '../features/terms/pages/policy_page.dart';
-import '../features/terms/pages/terms_page.dart';
-import '../features/test/test_page.dart';
+import '../../features/auth/pages/otp_page.dart';
+import '../../features/auth/pages/phone_page.dart';
+import '../../features/auth/pages/reason_page.dart';
+import '../../features/check/pages/check_result_page.dart';
+import '../../features/check/pages/web_page.dart';
+import '../../features/help/pages/help_status_page.dart';
+import '../../features/settings/pages/contact_page.dart';
+import '../../features/settings/pages/contact_status_page.dart';
+import '../../features/splash/splash_page.dart';
+import '../../features/auth/pages/auth_page.dart';
+import '../../features/home/home_page.dart';
+import '../../features/onboarding/pages/onboarding_page.dart';
+import '../../features/onboarding/pages/blocker_settings_page.dart';
+import '../../features/terms/pages/policy_page.dart';
+import '../../features/terms/pages/terms_page.dart';
+import '../../features/test/test_page.dart';
 
 final routerConfig = GoRouter(
   initialLocation: '/splash',

@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import '../../core/constants.dart';
 import '../../core/network/dio_options.dart';
 import 'models/phone.dart';
 
@@ -8,7 +7,7 @@ class MydbRepository {
   Future<Result> fetchPhones() async {
     try {
       final response = await dio.get(
-        Const.blackListURL,
+        'http://178.20.41.98/api/v1/blacklist/user-list/',
         options: options,
       );
 

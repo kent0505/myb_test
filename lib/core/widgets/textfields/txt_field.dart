@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/app_colors.dart';
+import '../../config/app_colors.dart';
 import '../../utils.dart';
 
 class TxtField extends StatelessWidget {

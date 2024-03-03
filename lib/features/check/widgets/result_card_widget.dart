@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../core/app_colors.dart';
+import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
+import '../../../core/widgets/buttons/border_button.dart';
+import '../../../core/widgets/text/text_widget.dart';
 
 class ResultCardWidget extends StatelessWidget {
   const ResultCardWidget({
@@ -39,12 +41,11 @@ class ResultCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          TextWidget(
             phone,
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w500,
-            ),
+            size: 24,
+            weight: 500,
+            color: AppColors.primaryText,
           ),
           const SizedBox(height: 24),
           Row(
@@ -57,16 +58,13 @@ class ResultCardWidget extends StatelessWidget {
                 height: 18,
               ),
               const SizedBox(width: 8),
-              Text(
+              TextWidget(
                 categories.isEmpty
                     ? 'Номер не числится в спам-базах'
                     : 'Найденные отметки у номера:',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: AppColors.basicGrey1,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                ),
+                size: 14,
+                weight: 400,
+                color: AppColors.basicGrey1,
               ),
             ],
           ),
@@ -78,12 +76,6 @@ class ResultCardWidget extends StatelessWidget {
                     spacing: 4,
                     runSpacing: 4,
                     children: [
-                      if (categories.isEmpty) ...[
-                        const _ResultCategoryWidget(
-                          text: 'Другое',
-                          id: 0,
-                        ),
-                      ],
                       for (var id in categories) ...[
                         for (var category in Utils.categories) ...[
                           if (category.id == id) ...[
@@ -103,35 +95,28 @@ class ResultCardWidget extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      const TextWidget(
                         'Информация \nо номере:',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: AppColors.basicGrey1,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                        ),
+                        size: 14,
+                        weight: 400,
+                        color: AppColors.basicGrey1,
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            TextWidget(
                               operator,
-                              style: const TextStyle(
-                                color: AppColors.primaryBlack,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                              ),
+                              size: 14,
+                              weight: 400,
+                              color: AppColors.primaryBlack,
                             ),
-                            Text(
+                            TextWidget(
                               region,
-                              style: const TextStyle(
-                                color: AppColors.primaryBlack,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                              ),
+                              size: 14,
+                              weight: 400,
+                              color: AppColors.primaryBlack,
                             ),
                           ],
                         ),
@@ -141,8 +126,10 @@ class ResultCardWidget extends StatelessWidget {
                 )
               : Container(),
           const SizedBox(height: 24),
-          _SearchInternetButton(
+          BorderButton(
+            title: 'Искать в интернете',
             active: false,
+            icon: 'global_search',
             onPressed: () {
               // context.push('/web', extra: '79005555555');
             },
@@ -175,71 +162,15 @@ class _ResultCategoryWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Center(
-            child: Text(
+            child: TextWidget(
               text,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: getTextColor(id),
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-              ),
+              size: 12,
+              weight: 400,
+              color: getTextColor(id),
             ),
           ),
         ),
       ],
-    );
-  }
-}
-
-class _SearchInternetButton extends StatelessWidget {
-  const _SearchInternetButton({
-    required this.active,
-    required this.onPressed,
-  });
-
-  final bool active;
-  final Function() onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      borderRadius: BorderRadius.circular(8),
-      child: InkWell(
-        onTap: active ? onPressed : null,
-        borderRadius: BorderRadius.circular(8),
-        splashColor: Colors.yellow[600],
-        splashFactory: InkRipple.splashFactory,
-        child: Ink(
-          height: 44,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: active ? AppColors.primaryOrange : AppColors.basicWhite2,
-              width: 2,
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/icons/global_search.svg',
-                width: 18,
-                height: 18,
-              ),
-              const SizedBox(width: 8),
-              const Text(
-                'Искать в интернете',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: AppColors.primaryBlack,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

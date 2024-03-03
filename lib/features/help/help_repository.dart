@@ -1,13 +1,12 @@
 import 'dart:developer';
 
-import '../../core/constants.dart';
 import '../../core/network/dio_options.dart';
 
 class HelpRepository {
   Future<bool> help(String name, String phone, String email) async {
     try {
       final response = await dio.post(
-        Const.helpURL,
+        'http://178.20.41.98/api/v1/legal_help/consultation_requests/',
         data: {
           'name': name,
           'phone_number': phone,

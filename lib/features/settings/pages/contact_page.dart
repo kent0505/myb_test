@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/app_colors.dart';
+import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
 import '../../../core/widgets/appbar/app_bar_widget.dart';
-import '../../../core/widgets/appbar/yellow_line_widget.dart';
+import '../../../core/widgets/text/yellow_line_widget.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/textfields/email_field.dart';
 import '../../../core/widgets/textfields/name_field.dart';
@@ -52,22 +52,12 @@ class _ContactPageState extends State<ContactPage> {
               ),
             ),
             const SizedBox(height: 30),
-            const Stack(
-              children: [
-                Text(
-                  'Вы можете написать разработчикам',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black,
-                  ),
-                ),
-                YellowLineWidget(
-                  width: 95,
-                  top: 2,
-                  left: 125,
-                ),
-              ],
+            const YellowLineTextWidget(
+              'Вы можете написать разработчикам',
+              size: 25,
+              width: 95,
+              top: 2,
+              left: 125,
             ),
             const SizedBox(height: 30),
             const Text(

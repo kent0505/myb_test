@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../app_colors.dart';
+import '../../config/app_colors.dart';
 
 class YellowButton extends StatelessWidget {
   const YellowButton({
     super.key,
-    this.onPressed,
     required this.title,
     required this.active,
     this.icon = '',
+    this.onPressed,
   });
 
-  final Function()? onPressed;
   final String title;
   final bool active;
   final String icon;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 44,
-      child: Material(
-        borderRadius: BorderRadius.circular(8),
+    return Material(
+      borderRadius: BorderRadius.circular(8),
+      child: SizedBox(
+        height: 44,
         child: InkWell(
           onTap: active ? onPressed : null,
           borderRadius: BorderRadius.circular(8),

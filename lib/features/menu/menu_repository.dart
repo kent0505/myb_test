@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import '../../core/constants.dart';
 import '../../core/network/dio_options.dart';
 import 'models/category.dart';
 
@@ -8,7 +7,7 @@ class MenuRepository {
   Future<Result> fetchCategories() async {
     try {
       final response = await dio.get(
-        Const.categoryURL,
+        'http://178.20.41.98/api/v1/categories/',
         options: options,
       );
 

@@ -1,8 +1,9 @@
+import 'package:blocker/core/widgets/text/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/app_colors.dart';
+import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
 import '../../../core/widgets/appbar/app_bar_widget.dart';
 import '../../../core/widgets/buttons/border_button.dart';
@@ -66,14 +67,11 @@ class _CheckResultPageState extends State<CheckResultPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            const Text(
+            const TextWidget(
               'Узнайте, кто вам звонил',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColors.basicBlack3,
-                fontWeight: FontWeight.w700,
-                fontSize: 24,
-              ),
+              size: 24,
+              weight: 700,
+              color: AppColors.basicBlack3,
             ),
             const SizedBox(height: 18),
             BlocBuilder<CheckBloc, CheckState>(

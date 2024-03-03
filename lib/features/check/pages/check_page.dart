@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/app_colors.dart';
 import '../../../core/utils.dart';
-import '../../../core/widgets/appbar/yellow_line_widget.dart';
+import '../../../core/widgets/text/yellow_line_widget.dart';
 import '../../../core/widgets/buttons/yellow_button.dart';
 import '../../../core/widgets/textfields/phone_field.dart';
 import '../bloc/check_bloc.dart';
@@ -34,23 +33,12 @@ class _CheckPageState extends State<CheckPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Stack(
-              children: [
-                Text(
-                  'Узнайте, кто вам звонил',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: AppColors.basicBlack3,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 24,
-                  ),
-                ),
-                YellowLineWidget(
-                  width: 115,
-                  top: 2,
-                  right: 0,
-                ),
-              ],
+            const YellowLineTextWidget(
+              'Узнайте, кто вам звонил',
+              size: 24,
+              width: 115,
+              top: 2,
+              right: 0,
             ),
             const SizedBox(height: 24),
             Row(

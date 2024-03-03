@@ -2,14 +2,13 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
-import '../../core/constants.dart';
 import '../../core/network/dio_options.dart';
 
 class AuthRepository {
   Future<Result> registerGetCode(String phone) async {
     try {
       final response = await dio.post(
-        Const.registerGetCodeURL,
+        'http://178.20.41.98/api/v1/users/registration_get_code/',
         data: {
           'phone_number': phone,
         },
@@ -35,7 +34,7 @@ class AuthRepository {
   Future<Result> login(String phone, String fcm) async {
     try {
       final response = await dio.post(
-        Const.loginURL,
+        'http://178.20.41.98/api/v1/users/auth/',
         data: {
           'phone_number': phone,
           'fcm_token': fcm,
@@ -62,7 +61,7 @@ class AuthRepository {
   Future<Result> register(String phone, String fcm, String reason) async {
     try {
       final response = await dio.post(
-        Const.registerURL,
+        'http://178.20.41.98/api/v1/users/registration/',
         data: {
           'phone_number': phone,
           'fcm_token': fcm,

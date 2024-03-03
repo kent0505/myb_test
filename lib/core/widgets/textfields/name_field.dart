@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../core/app_colors.dart';
+import '../../config/app_colors.dart';
 import '../../utils.dart';
 import 'widgets/check_icon.dart';
 import 'widgets/label_text.dart';
