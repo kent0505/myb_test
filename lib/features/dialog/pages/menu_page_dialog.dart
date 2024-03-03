@@ -23,10 +23,11 @@ class MenuPageDialog extends StatelessWidget {
             children: [
               const Spacer(),
               const TextWidget(
-                'Обновляет базу',
-                size: 24,
+                'При нажатии на кнопку "Обновить базу", база нежелательных номеров обновляется принудительно',
+                size: 14,
                 weight: 500,
-                color: AppColors.primaryText,
+                center: true,
+                color: AppColors.primaryBlack,
               ),
               const Spacer(),
               YellowButton(

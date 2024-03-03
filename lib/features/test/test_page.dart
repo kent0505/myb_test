@@ -88,13 +88,17 @@ class _TestPageState extends State<TestPage> {
               ),
             const Text(
               "Status of call",
-              style: TextStyle(fontSize: 24),
+              style: TextStyle(
+                fontSize: 24,
+              ),
             ),
             if (status.status == PhoneStateStatus.CALL_INCOMING ||
                 status.status == PhoneStateStatus.CALL_STARTED)
               Text(
                 "Number: ${status.number}",
-                style: const TextStyle(fontSize: 24),
+                style: const TextStyle(
+                  fontSize: 24,
+                ),
               ),
             Icon(
               getIcons(),
