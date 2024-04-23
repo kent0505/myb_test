@@ -11,7 +11,7 @@ dependencies:
 
   #NETWORK
   dio: ^5.4.0
-  connectivity_plus: ^5.0.2
+  # connectivity_plus: ^5.0.2
 
   #STATE
   flutter_bloc: ^8.1.3
@@ -28,10 +28,10 @@ dependencies:
   shared_preferences: ^2.2.2
   firebase_core: ^2.25.4
   jwt_decoder: ^2.0.1
-  connectycube_flutter_call_kit: ^2.7.0
-  flutter_callkit_incoming: ^2.0.1+2
   webview_flutter: ^4.7.0
-  phone_state: ^1.0.3
+  # connectycube_flutter_call_kit: ^2.7.0
+  # flutter_callkit_incoming: ^2.0.1+2
+  # phone_state: ^1.0.3
 
 dev_dependencies:
   flutter_test:

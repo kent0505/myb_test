@@ -15,7 +15,14 @@ import 'features/check/bloc/check_bloc.dart';
 import 'features/help/bloc/help_bloc.dart';
 import 'features/settings/bloc/settings_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(const MyApp());
 }
 
@@ -24,11 +31,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthBloc()),
